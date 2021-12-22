@@ -1,0 +1,2417 @@
+student@workstation ~]$ lab-configure
+
+This script configures the connection parameters to access the OpenShift cluster for your lab scripts
+
+ · Enter the API Endpoint: https://api.eu46.prod.nextcle.com:6443
+ · Enter the Username: saurav
+ · Enter the Password: fb45801063754c5aae38^C
+[student@workstation ~]$ lab-configure
+
+This script configures the connection parameters to access the OpenShift cluster for your lab scripts
+
+ · Enter the API Endpoint: https://api.eu46.prod.nextcle.com:6443
+ · Enter the Username: oldwey
+ · Enter the Password: fb45801063754c5aae38
+ · Enter the GitHub Account Name: sgulati89
+ · Enter the Quay.io Account Name: sorav_gulati
+
+You entered:
+ · API Endpoint:			https://api.eu46.prod.nextcle.com:6443
+ · Username:				oldwey
+ · Password:				fb45801063754c5aae38
+ · GitHub Account Name:			sgulati89
+ · Quay.io Account Name:		sorav_gulati
+
+Generated config:
+ · API Endpoint:			https://api.eu46.prod.nextcle.com:6443
+ · Wildcard Domain:			apps.eu46.prod.nextcle.com
+ · Nexus Server Host:			nexus-common.apps.eu46.prod.nextcle.com
+ · Username:				oldwey
+ · Password:				fb45801063754c5aae38
+ · GitHub Account Name:			sgulati89
+ · Quay.io Account Name:		sorav_gulati
+
+Verifying your API Endpoint...
+
+Verifying your Nexus host...
+
+Verifying your OpenShift developer user credentials...
+
+Verifying your GitHub account name...
+
+Verifying your Quay.io account name...
+
+Verifying your cluster configuration...
+
+Saving your lab configuration file...
+
+Saving your Maven settings file...
+
+All fine, lab config saved. You can now proceed with your exercises.
+
+If you need to modify the configuration, rerun this script or directly modify the values in /usr/local/etc/ocp4.config.
+
+[student@workstation ~]$ ls
+Desktop     Documents  oc_commands.txt      Pictures    s2i-sample-app   tmp
+DO288       Downloads  oc_commands.txt.bkp  Public      Templates        Videos
+DO288-apps  Music      pat                  s2i-go-app  temp.properties
+[student@workstation ~]$ cat /usr/
+bin/     include/ lib64/   local/   share/   tmp/     
+games/   lib/     libexec/ sbin/    src/     
+[student@workstation ~]$ cat /usr/
+bin/     include/ lib64/   local/   share/   tmp/     
+games/   lib/     libexec/ sbin/    src/     
+[student@workstation ~]$ cat /usr/src/
+debug/   kernels/ 
+[student@workstation ~]$ cat /usr/local/
+bin/     etc/     games/   include/ lib/     lib64/   libexec/ sbin/    share/   src/
+[student@workstation ~]$ cat /usr/local/etc/ocp4.
+ocp4.config    ocp4.defaults  
+[student@workstation ~]$ cat /usr/local/etc/ocp4.config 
+RHT_OCP4_MASTER_API=https://api.eu46.prod.nextcle.com:6443
+RHT_OCP4_WILDCARD_DOMAIN=apps.eu46.prod.nextcle.com
+RHT_OCP4_NEXUS_SERVER=nexus-common.apps.eu46.prod.nextcle.com
+RHT_OCP4_DEV_USER=oldwey
+RHT_OCP4_DEV_PASSWORD=fb45801063754c5aae38
+RHT_OCP4_GITHUB_USER=sgulati89
+RHT_OCP4_QUAY_USER=sorav_gulati
+[student@workstation ~]$ vi /usr/local/etc/ocp4.config 
+[student@workstation ~]$ ls
+Desktop     Documents  oc_commands.txt      Pictures    s2i-sample-app   tmp
+DO288       Downloads  oc_commands.txt.bkp  Public      Templates        Videos
+DO288-apps  Music      pat                  s2i-go-app  temp.properties
+[student@workstation ~]$ cat /usr/local/etc/ocp4.config
+RHT_OCP4_MASTER_API=https://api.eu46.prod.nextcle.com:6443
+RHT_OCP4_WILDCARD_DOMAIN=apps.eu46.prod.nextcle.com
+RHT_OCP4_NEXUS_SERVER=nexus-common.apps.eu46.prod.nextcle.com
+RHT_OCP4_DEV_USER=oldwey
+RHT_OCP4_DEV_PASSWORD=fb45801063754c5aae38
+RHT_OCP4_GITHUB_USER=sgulati89
+RHT_OCP4_QUAY_USER=sorav_gulati
+[student@workstation ~]$ echo $RHT_OCP4_MASTER_API
+https://api.eu46.prod.nextcle.com:6443
+[student@workstation ~]$ oc login -u $RHT_OCP4_DEV_USER -p RHT_OCP4_DEV_PASSWORD
+Login failed (401 Unauthorized)
+Verify you have provided correct credentials.
+[student@workstation ~]$ oc login -u $RHT_OCP4_DEV_USER -p $RHT_OCP4_DEV_PASSWORD
+Login successful.
+
+You don't have any projects. You can try to create a new project, by running
+
+    oc new-project <projectname>
+
+[student@workstation ~]$ oc new-project sourav-1
+Now using project "sourav-1" on server "https://api.eu46.prod.nextcle.com:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
+
+[student@workstation ~]$ ls
+Desktop     Documents  oc_commands.txt      Pictures    s2i-sample-app   tmp
+DO288       Downloads  oc_commands.txt.bkp  Public      Templates        Videos
+DO288-apps  Music      pat                  s2i-go-app  temp.properties
+[student@workstation ~]$ vim sh-pat
+[student@workstation ~]$ cat sh-pat
+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
+[student@workstation ~]$ oc whoami
+oldwey
+[student@workstation ~]$ oc api-resources
+NAME                                  SHORTNAMES       APIGROUP                              NAMESPACED   KIND
+bindings                                                                                     true         Binding
+componentstatuses                     cs                                                     false        ComponentStatus
+configmaps                            cm                                                     true         ConfigMap
+endpoints                             ep                                                     true         Endpoints
+events                                ev                                                     true         Event
+limitranges                           limits                                                 true         LimitRange
+namespaces                            ns                                                     false        Namespace
+nodes                                 no                                                     false        Node
+persistentvolumeclaims                pvc                                                    true         PersistentVolumeClaim
+persistentvolumes                     pv                                                     false        PersistentVolume
+pods                                  po                                                     true         Pod
+podtemplates                                                                                 true         PodTemplate
+replicationcontrollers                rc                                                     true         ReplicationController
+resourcequotas                        quota                                                  true         ResourceQuota
+secrets                                                                                      true         Secret
+serviceaccounts                       sa                                                     true         ServiceAccount
+services                              svc                                                    true         Service
+mutatingwebhookconfigurations                          admissionregistration.k8s.io          false        MutatingWebhookConfiguration
+validatingwebhookconfigurations                        admissionregistration.k8s.io          false        ValidatingWebhookConfiguration
+agents                                agent            agent.k8s.elastic.co                  true         Agent
+customresourcedefinitions             crd,crds         apiextensions.k8s.io                  false        CustomResourceDefinition
+apiservices                                            apiregistration.k8s.io                false        APIService
+apmservers                            apm              apm.k8s.elastic.co                    true         ApmServer
+controllerrevisions                                    apps                                  true         ControllerRevision
+daemonsets                            ds               apps                                  true         DaemonSet
+deployments                           deploy           apps                                  true         Deployment
+replicasets                           rs               apps                                  true         ReplicaSet
+statefulsets                          sts              apps                                  true         StatefulSet
+deploymentconfigs                     dc               apps.openshift.io                     true         DeploymentConfig
+tokenreviews                                           authentication.k8s.io                 false        TokenReview
+localsubjectaccessreviews                              authorization.k8s.io                  true         LocalSubjectAccessReview
+selfsubjectaccessreviews                               authorization.k8s.io                  false        SelfSubjectAccessReview
+selfsubjectrulesreviews                                authorization.k8s.io                  false        SelfSubjectRulesReview
+subjectaccessreviews                                   authorization.k8s.io                  false        SubjectAccessReview
+clusterrolebindings                                    authorization.openshift.io            false        ClusterRoleBinding
+clusterroles                                           authorization.openshift.io            false        ClusterRole
+localresourceaccessreviews                             authorization.openshift.io            true         LocalResourceAccessReview
+localsubjectaccessreviews                              authorization.openshift.io            true         LocalSubjectAccessReview
+resourceaccessreviews                                  authorization.openshift.io            false        ResourceAccessReview
+rolebindingrestrictions                                authorization.openshift.io            true         RoleBindingRestriction
+rolebindings                                           authorization.openshift.io            true         RoleBinding
+roles                                                  authorization.openshift.io            true         Role
+selfsubjectrulesreviews                                authorization.openshift.io            true         SelfSubjectRulesReview
+subjectaccessreviews                                   authorization.openshift.io            false        SubjectAccessReview
+subjectrulesreviews                                    authorization.openshift.io            true         SubjectRulesReview
+horizontalpodautoscalers              hpa              autoscaling                           true         HorizontalPodAutoscaler
+clusterautoscalers                    ca               autoscaling.openshift.io              false        ClusterAutoscaler
+machineautoscalers                    ma               autoscaling.openshift.io              true         MachineAutoscaler
+cronjobs                              cj               batch                                 true         CronJob
+jobs                                                   batch                                 true         Job
+beats                                 beat             beat.k8s.elastic.co                   true         Beat
+buildconfigs                          bc               build.openshift.io                    true         BuildConfig
+builds                                                 build.openshift.io                    true         Build
+certificatesigningrequests            csr              certificates.k8s.io                   false        CertificateSigningRequest
+credentialsrequests                                    cloudcredential.openshift.io          true         CredentialsRequest
+apiservers                                             config.openshift.io                   false        APIServer
+authentications                                        config.openshift.io                   false        Authentication
+builds                                                 config.openshift.io                   false        Build
+clusteroperators                      co               config.openshift.io                   false        ClusterOperator
+clusterversions                                        config.openshift.io                   false        ClusterVersion
+consoles                                               config.openshift.io                   false        Console
+dnses                                                  config.openshift.io                   false        DNS
+featuregates                                           config.openshift.io                   false        FeatureGate
+images                                                 config.openshift.io                   false        Image
+infrastructures                                        config.openshift.io                   false        Infrastructure
+ingresses                                              config.openshift.io                   false        Ingress
+networks                                               config.openshift.io                   false        Network
+oauths                                                 config.openshift.io                   false        OAuth
+operatorhubs                                           config.openshift.io                   false        OperatorHub
+projects                                               config.openshift.io                   false        Project
+proxies                                                config.openshift.io                   false        Proxy
+schedulers                                             config.openshift.io                   false        Scheduler
+consoleclidownloads                                    console.openshift.io                  false        ConsoleCLIDownload
+consoleexternalloglinks                                console.openshift.io                  false        ConsoleExternalLogLink
+consolelinks                                           console.openshift.io                  false        ConsoleLink
+consolenotifications                                   console.openshift.io                  false        ConsoleNotification
+consoleyamlsamples                                     console.openshift.io                  false        ConsoleYAMLSample
+leases                                                 coordination.k8s.io                   true         Lease
+endpointslices                                         discovery.k8s.io                      true         EndpointSlice
+elasticsearches                       es               elasticsearch.k8s.elastic.co          true         Elasticsearch
+enterprisesearches                    ent              enterprisesearch.k8s.elastic.co       true         EnterpriseSearch
+events                                ev               events.k8s.io                         true         Event
+ingresses                             ing              extensions                            true         Ingress
+flowschemas                                            flowcontrol.apiserver.k8s.io          false        FlowSchema
+prioritylevelconfigurations                            flowcontrol.apiserver.k8s.io          false        PriorityLevelConfiguration
+nexus                                                  gpte.opentlc.com                      true         Nexus
+userquota                                              gpte.opentlc.com                      false        UserQuota
+helmchartrepositories                                  helm.openshift.io                     false        HelmChartRepository
+images                                                 image.openshift.io                    false        Image
+imagesignatures                                        image.openshift.io                    false        ImageSignature
+imagestreamimages                     isimage          image.openshift.io                    true         ImageStreamImage
+imagestreamimports                                     image.openshift.io                    true         ImageStreamImport
+imagestreammappings                                    image.openshift.io                    true         ImageStreamMapping
+imagestreams                          is               image.openshift.io                    true         ImageStream
+imagestreamtags                       istag            image.openshift.io                    true         ImageStreamTag
+imagetags                             itag             image.openshift.io                    true         ImageTag
+configs                                                imageregistry.operator.openshift.io   false        Config
+imagepruners                                           imageregistry.operator.openshift.io   false        ImagePruner
+dnsrecords                                             ingress.operator.openshift.io         true         DNSRecord
+network-attachment-definitions        net-attach-def   k8s.cni.cncf.io                       true         NetworkAttachmentDefinition
+kafkabridges                          kb               kafka.strimzi.io                      true         KafkaBridge
+kafkaconnectors                       kctr             kafka.strimzi.io                      true         KafkaConnector
+kafkaconnects                         kc               kafka.strimzi.io                      true         KafkaConnect
+kafkaconnects2is                      kcs2i            kafka.strimzi.io                      true         KafkaConnectS2I
+kafkamirrormaker2s                    kmm2             kafka.strimzi.io                      true         KafkaMirrorMaker2
+kafkamirrormakers                     kmm              kafka.strimzi.io                      true         KafkaMirrorMaker
+kafkarebalances                       kr               kafka.strimzi.io                      true         KafkaRebalance
+kafkas                                k                kafka.strimzi.io                      true         Kafka
+kafkatopics                           kt               kafka.strimzi.io                      true         KafkaTopic
+kafkausers                            ku               kafka.strimzi.io                      true         KafkaUser
+kibanas                               kb               kibana.k8s.elastic.co                 true         Kibana
+machinehealthchecks                   mhc,mhcs         machine.openshift.io                  true         MachineHealthCheck
+machines                                               machine.openshift.io                  true         Machine
+machinesets                                            machine.openshift.io                  true         MachineSet
+containerruntimeconfigs               ctrcfg           machineconfiguration.openshift.io     false        ContainerRuntimeConfig
+controllerconfigs                                      machineconfiguration.openshift.io     false        ControllerConfig
+kubeletconfigs                                         machineconfiguration.openshift.io     false        KubeletConfig
+machineconfigpools                    mcp              machineconfiguration.openshift.io     false        MachineConfigPool
+machineconfigs                        mc               machineconfiguration.openshift.io     false        MachineConfig
+elasticmapsservers                    ems              maps.k8s.elastic.co                   true         ElasticMapsServer
+baremetalhosts                        bmh,bmhost       metal3.io                             true         BareMetalHost
+provisionings                                          metal3.io                             false        Provisioning
+nodes                                                  metrics.k8s.io                        false        NodeMetrics
+pods                                                   metrics.k8s.io                        true         PodMetrics
+storagestates                                          migration.k8s.io                      false        StorageState
+storageversionmigrations                               migration.k8s.io                      false        StorageVersionMigration
+alertmanagers                                          monitoring.coreos.com                 true         Alertmanager
+podmonitors                                            monitoring.coreos.com                 true         PodMonitor
+probes                                                 monitoring.coreos.com                 true         Probe
+prometheuses                                           monitoring.coreos.com                 true         Prometheus
+prometheusrules                                        monitoring.coreos.com                 true         PrometheusRule
+servicemonitors                                        monitoring.coreos.com                 true         ServiceMonitor
+thanosrulers                                           monitoring.coreos.com                 true         ThanosRuler
+clusternetworks                                        network.openshift.io                  false        ClusterNetwork
+egressnetworkpolicies                                  network.openshift.io                  true         EgressNetworkPolicy
+hostsubnets                                            network.openshift.io                  false        HostSubnet
+netnamespaces                                          network.openshift.io                  false        NetNamespace
+operatorpkis                                           network.operator.openshift.io         true         OperatorPKI
+ingressclasses                                         networking.k8s.io                     false        IngressClass
+ingresses                             ing              networking.k8s.io                     true         Ingress
+networkpolicies                       netpol           networking.k8s.io                     true         NetworkPolicy
+runtimeclasses                                         node.k8s.io                           false        RuntimeClass
+oauthaccesstokens                                      oauth.openshift.io                    false        OAuthAccessToken
+oauthauthorizetokens                                   oauth.openshift.io                    false        OAuthAuthorizeToken
+oauthclientauthorizations                              oauth.openshift.io                    false        OAuthClientAuthorization
+oauthclients                                           oauth.openshift.io                    false        OAuthClient
+authentications                                        operator.openshift.io                 false        Authentication
+cloudcredentials                                       operator.openshift.io                 false        CloudCredential
+clustercsidrivers                                      operator.openshift.io                 false        ClusterCSIDriver
+configs                                                operator.openshift.io                 false        Config
+consoles                                               operator.openshift.io                 false        Console
+csisnapshotcontrollers                                 operator.openshift.io                 false        CSISnapshotController
+dnses                                                  operator.openshift.io                 false        DNS
+etcds                                                  operator.openshift.io                 false        Etcd
+imagecontentsourcepolicies                             operator.openshift.io                 false        ImageContentSourcePolicy
+ingresscontrollers                                     operator.openshift.io                 true         IngressController
+kubeapiservers                                         operator.openshift.io                 false        KubeAPIServer
+kubecontrollermanagers                                 operator.openshift.io                 false        KubeControllerManager
+kubeschedulers                                         operator.openshift.io                 false        KubeScheduler
+kubestorageversionmigrators                            operator.openshift.io                 false        KubeStorageVersionMigrator
+networks                                               operator.openshift.io                 false        Network
+openshiftapiservers                                    operator.openshift.io                 false        OpenShiftAPIServer
+openshiftcontrollermanagers                            operator.openshift.io                 false        OpenShiftControllerManager
+servicecas                                             operator.openshift.io                 false        ServiceCA
+storages                                               operator.openshift.io                 false        Storage
+catalogsources                        catsrc           operators.coreos.com                  true         CatalogSource
+clusterserviceversions                csv,csvs         operators.coreos.com                  true         ClusterServiceVersion
+installplans                          ip               operators.coreos.com                  true         InstallPlan
+operatorgroups                        og               operators.coreos.com                  true         OperatorGroup
+operators                                              operators.coreos.com                  false        Operator
+subscriptions                         sub,subs         operators.coreos.com                  true         Subscription
+packagemanifests                                       packages.operators.coreos.com         true         PackageManifest
+poddisruptionbudgets                  pdb              policy                                true         PodDisruptionBudget
+podsecuritypolicies                   psp              policy                                false        PodSecurityPolicy
+projectrequests                                        project.openshift.io                  false        ProjectRequest
+projects                                               project.openshift.io                  false        Project
+appliedclusterresourcequotas                           quota.openshift.io                    true         AppliedClusterResourceQuota
+clusterresourcequotas                 clusterquota     quota.openshift.io                    false        ClusterResourceQuota
+clusterrolebindings                                    rbac.authorization.k8s.io             false        ClusterRoleBinding
+clusterroles                                           rbac.authorization.k8s.io             false        ClusterRole
+rolebindings                                           rbac.authorization.k8s.io             true         RoleBinding
+roles                                                  rbac.authorization.k8s.io             true         Role
+projecttrackers                                        redhattraining.com                    false        ProjectTracker
+apicurioregistries                                     registry.apicur.io                    true         ApicurioRegistry
+routes                                                 route.openshift.io                    true         Route
+configs                                                samples.operator.openshift.io         false        Config
+priorityclasses                       pc               scheduling.k8s.io                     false        PriorityClass
+rangeallocations                                       security.internal.openshift.io        false        RangeAllocation
+podsecuritypolicyreviews                               security.openshift.io                 true         PodSecurityPolicyReview
+podsecuritypolicyselfsubjectreviews                    security.openshift.io                 true         PodSecurityPolicySelfSubjectReview
+podsecuritypolicysubjectreviews                        security.openshift.io                 true         PodSecurityPolicySubjectReview
+rangeallocations                                       security.openshift.io                 false        RangeAllocation
+securitycontextconstraints            scc              security.openshift.io                 false        SecurityContextConstraints
+volumesnapshotclasses                                  snapshot.storage.k8s.io               false        VolumeSnapshotClass
+volumesnapshotcontents                                 snapshot.storage.k8s.io               false        VolumeSnapshotContent
+volumesnapshots                                        snapshot.storage.k8s.io               true         VolumeSnapshot
+csidrivers                                             storage.k8s.io                        false        CSIDriver
+csinodes                                               storage.k8s.io                        false        CSINode
+storageclasses                        sc               storage.k8s.io                        false        StorageClass
+volumeattachments                                      storage.k8s.io                        false        VolumeAttachment
+brokertemplateinstances                                template.openshift.io                 false        BrokerTemplateInstance
+processedtemplates                                     template.openshift.io                 true         Template
+templateinstances                                      template.openshift.io                 true         TemplateInstance
+templates                                              template.openshift.io                 true         Template
+profiles                                               tuned.openshift.io                    true         Profile
+tuneds                                                 tuned.openshift.io                    true         Tuned
+groups                                                 user.openshift.io                     false        Group
+identities                                             user.openshift.io                     false        Identity
+useridentitymappings                                   user.openshift.io                     false        UserIdentityMapping
+users                                                  user.openshift.io                     false        User
+ippools                                                whereabouts.cni.cncf.io               true         IPPool
+overlappingrangeipreservations                         whereabouts.cni.cncf.io               true         OverlappingRangeIPReservation
+[student@workstation ~]$ lab docker-build start
+
+Checking prerequisites for GE: Deploying an Application to an OpenShift Cluster
+
+ Checking local clone of the applications repository:
+ · Folder '/home/student/DO288-apps' is a git repo.............  SUCCESS
+ · Git repo '/home/student/DO288-apps' has no pending changes..  SUCCESS
+ Verifying the OpenShift cluster is running:
+ · Log in on OpenShift.........................................  SUCCESS
+ · Check master node eu46-qj5nx-master-0 is ready..............  SUCCESS
+ · Check master node eu46-qj5nx-master-1 is ready..............  SUCCESS
+ · Check master node eu46-qj5nx-master-2 is ready..............  SUCCESS
+ · Check the internal registry is up and running...............  SUCCESS
+ Checking required artifacts:
+ · Project 'ubi-echo' exists in student's GitHub fork..........  SUCCESS
+ Checking for conflicts with existing OpenShift projects:
+ · Project 'oldwey-docker-build' is absent.....................  SUCCESS
+
+Setting up the classroom for GE: Deploying an Application to an OpenShift Cluster
+
+ · Download exercise files.....................................  SUCCESS
+ · Download solution files.....................................  SUCCESS
+
+Overall start status...........................................  SUCCESS
+
+[student@workstation ~]$ ls
+Desktop     Documents  oc_commands.txt      Pictures    s2i-sample-app  temp.properties
+DO288       Downloads  oc_commands.txt.bkp  Public      sh-pat          tmp
+DO288-apps  Music      pat                  s2i-go-app  Templates       Videos
+[student@workstation ~]$ cd DO288-apps/
+[student@workstation DO288-apps]$ ls
+app-config         html-helloworld    php-hello-dockerfile  README.md        todo-single
+books              java-serverhost    php-helloworld        s2i-scripts      todo-ssr
+build-app          LICENSE            php-scale             simple-pipeline  trigger-builds
+container-build    micro-java         post-commit           todo-api         ubi-echo
+go-hello           movies             probes                todo-api-micro   ubi-info
+hello-java         nexus3             quip                  todo-backend     ubi-sleep
+hello-world-nginx  nodejs-helloworld  quotes                todo-frontend
+[student@workstation DO288-apps]$ ls -la
+total 28
+drwxrwxr-x. 35 student student  4096 Dec 20 18:28 .
+drwx------. 25 student student  4096 Dec 22 12:46 ..
+drwxrwxr-x.  2 student student    57 Dec 11 17:04 app-config
+drwxrwxr-x.  9 student student   196 Dec 11 17:04 books
+drwxrwxr-x.  2 student student    40 Dec 11 17:04 build-app
+drwxrwxr-x.  3 student student    38 Dec 14 10:54 container-build
+drwxrwxr-x.  8 student student   185 Dec 22 12:54 .git
+-rw-rw-r--.  1 student student  1011 Dec 11 17:04 .gitignore
+drwxrwxr-x.  2 student student    20 Dec 20 19:37 go-hello
+drwxrwxr-x.  3 student student    60 Dec 18 18:11 hello-java
+drwxrwxr-x.  2 student student    63 Dec 11 17:04 hello-world-nginx
+drwxrwxr-x.  2 student student    24 Dec 11 17:04 html-helloworld
+drwxrwxr-x.  3 student student    32 Dec 11 17:04 java-serverhost
+-rw-rw-r--.  1 student student 11343 Dec 11 17:04 LICENSE
+drwxrwxr-x.  3 student student    71 Dec 11 17:04 micro-java
+drwxrwxr-x.  3 student student    71 Dec 11 17:04 movies
+drwxrwxr-x.  2 student student    62 Dec 11 17:04 nexus3
+drwxrwxr-x.  2 student student    40 Dec 22 05:41 nodejs-helloworld
+drwxrwxr-x.  2 student student    41 Dec 11 17:04 php-hello-dockerfile
+drwxrwxr-x.  2 student student    23 Dec 11 17:04 php-helloworld
+drwxrwxr-x.  2 student student    23 Dec 11 17:04 php-scale
+drwxrwxr-x.  2 student student    23 Dec 11 17:04 post-commit
+drwxrwxr-x.  2 student student    40 Dec 11 17:04 probes
+drwxrwxr-x.  3 student student    32 Dec 11 17:04 quip
+drwxrwxr-x.  2 student student    38 Dec 11 17:04 quotes
+-rw-rw-r--.  1 student student   205 Dec 11 17:04 README.md
+drwxrwxr-x.  3 student student    36 Dec 11 17:04 s2i-scripts
+drwxrwxr-x.  2 student student    25 Dec 11 17:04 simple-pipeline
+drwxrwxr-x.  3 student student    88 Dec 11 17:04 todo-api
+drwxrwxr-x.  3 student student    32 Dec 11 17:04 todo-api-micro
+drwxrwxr-x.  3 student student   164 Dec 11 17:04 todo-backend
+drwxrwxr-x.  4 student student   195 Dec 11 17:04 todo-frontend
+drwxrwxr-x.  5 student student    85 Dec 11 17:04 todo-single
+drwxrwxr-x.  3 student student   115 Dec 11 17:04 todo-ssr
+drwxrwxr-x.  2 student student    23 Dec 11 17:04 trigger-builds
+drwxrwxr-x.  2 student student    24 Dec 21 11:33 ubi-echo
+drwxrwxr-x.  2 student student    39 Dec 11 17:04 ubi-info
+drwxrwxr-x.  2 student student    24 Dec 11 17:04 ubi-sleep
+[student@workstation DO288-apps]$ git branch -a
+  app-config
+* container-build
+  custom-s2i
+  design-container
+  docker-buiild
+  docker-build
+  main
+  manage-builds
+  source-build
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/app-config
+  remotes/origin/apps-archive
+  remotes/origin/container-build
+  remotes/origin/container-build_to_use_Conteinerfile
+  remotes/origin/custom-s2i
+  remotes/origin/dependabot/npm_and_yarn/books/path-parse-1.0.7
+  remotes/origin/design-container
+  remotes/origin/dkolepp/ch9s6
+  remotes/origin/dkolepp/nexus3
+  remotes/origin/docker-build
+  remotes/origin/fix-chef-download
+  remotes/origin/fix/jkube-issues
+  remotes/origin/gbianco/todo-backend-rewrite
+  remotes/origin/gbianco/todo-frontend-rewrite
+  remotes/origin/jordisola/ch10-review
+  remotes/origin/main
+  remotes/origin/manage-builds
+  remotes/origin/master
+  remotes/origin/maudemor/base-micro-java
+  remotes/origin/revert-135-gbianco/todo-frontend-rewrite
+  remotes/origin/source-build
+[student@workstation DO288-apps]$ git status
+On branch container-build
+Your branch is up to date with 'origin/container-build'.
+
+nothing to commit, working tree clean
+[student@workstation DO288-apps]$ git remote -v
+origin	https://github.com/sgulati89/DO288-apps.git (fetch)
+origin	https://github.com/sgulati89/DO288-apps.git (push)
+[student@workstation DO288-apps]$ cd ..
+[student@workstation ~]$ ls
+Desktop     Documents  oc_commands.txt      Pictures    s2i-sample-app  temp.properties
+DO288       Downloads  oc_commands.txt.bkp  Public      sh-pat          tmp
+DO288-apps  Music      pat                  s2i-go-app  Templates       Videos
+[student@workstation ~]$ mkdir sshl
+[student@workstation ~]$ ls
+Desktop     Documents  oc_commands.txt      Pictures    s2i-sample-app  Templates        Videos
+DO288       Downloads  oc_commands.txt.bkp  Public      sh-pat          temp.properties
+DO288-apps  Music      pat                  s2i-go-app  sshl            tmp
+[student@workstation ~]$ cd sshl
+[student@workstation sshl]$ ls
+[student@workstation sshl]$ git clone https://github.com/gitish/DO288-apps.git
+Cloning into 'DO288-apps'...
+remote: Enumerating objects: 1124, done.
+remote: Total 1124 (delta 0), reused 0 (delta 0), pack-reused 1124
+Receiving objects: 100% (1124/1124), 1.05 MiB | 2.17 MiB/s, done.
+Resolving deltas: 100% (266/266), done.
+[student@workstation sshl]$ ls
+DO288-apps
+[student@workstation sshl]$ cd DO288-apps/
+[student@workstation DO288-apps]$ ls
+app-config         html-helloworld    php-hello-dockerfile  README.md        todo-single
+books              java-serverhost    php-helloworld        s2i-scripts      todo-ssr
+build-app          LICENSE            php-scale             simple-pipeline  trigger-builds
+container-build    micro-java         post-commit           todo-api         ubi-echo
+go-hello           movies             probes                todo-api-micro   ubi-info
+hello-java         nexus3             quip                  todo-backend     ubi-sleep
+hello-world-nginx  nodejs-helloworld  quotes                todo-frontend
+[student@workstation DO288-apps]$ git branch
+* main
+[student@workstation DO288-apps]$ git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/app-config
+  remotes/origin/apps-archive
+  remotes/origin/container-build_to_use_Conteinerfile
+  remotes/origin/dependabot/npm_and_yarn/books/path-parse-1.0.7
+  remotes/origin/dkolepp/ch9s6
+  remotes/origin/dkolepp/nexus3
+  remotes/origin/docker-build
+  remotes/origin/fix-chef-download
+  remotes/origin/fix/jkube-issues
+  remotes/origin/gbianco/todo-backend-rewrite
+  remotes/origin/gbianco/todo-frontend-rewrite
+  remotes/origin/jordisola/ch10-review
+  remotes/origin/main
+  remotes/origin/manage-builds
+  remotes/origin/master
+  remotes/origin/maudemor/base-micro-java
+  remotes/origin/revert-135-gbianco/todo-frontend-rewrite
+[student@workstation DO288-apps]$ cd ..
+[student@workstation sshl]$ cd ..
+[student@workstation ~]$ ls
+Desktop     Documents  oc_commands.txt      Pictures    s2i-sample-app  Templates        Videos
+DO288       Downloads  oc_commands.txt.bkp  Public      sh-pat          temp.properties
+DO288-apps  Music      pat                  s2i-go-app  sshl            tmp
+[student@workstation ~]$ lab docker-build stop
+Missing or unrecognized command - stop
+This script controls the setup and grading of this lab.
+Usage: lab docker-build COMMAND
+       lab docker-build -h|--help
+
+COMMAND is one of: start finish
+
+[student@workstation ~]$ lab docker-build -h
+This script controls the setup and grading of this lab.
+Usage: lab docker-build COMMAND
+       lab docker-build -h|--help
+
+COMMAND is one of: start finish
+
+[student@workstation ~]$ lab docker-build finish
+
+Completing GE: Deploying an Application to an OpenShift Cluster
+
+ · Log in on OpenShift.........................................  SUCCESS
+ · Remove exercise files.......................................  SUCCESS
+ · Remove solution files.......................................  SUCCESS
+ · Git repo '/home/student/DO288-apps' has no pending changes..  SUCCESS
+
+Please use start if you wish to do the exercise again.
+
+[student@workstation ~]$ ls
+Desktop     Documents  oc_commands.txt      Pictures    s2i-sample-app  Templates        Videos
+DO288       Downloads  oc_commands.txt.bkp  Public      sh-pat          temp.properties
+DO288-apps  Music      pat                  s2i-go-app  sshl            tmp
+[student@workstation ~]$ cd sshl
+[student@workstation sshl]$ ls
+DO288-apps
+[student@workstation sshl]$ lab docker-build start
+
+Checking prerequisites for GE: Deploying an Application to an OpenShift Cluster
+
+ Checking local clone of the applications repository:
+ · Folder '/home/student/DO288-apps' is a git repo.............  SUCCESS
+ · Git repo '/home/student/DO288-apps' has no pending changes..  SUCCESS
+ Verifying the OpenShift cluster is running:
+ · Log in on OpenShift.........................................  SUCCESS
+ · Check master node eu46-qj5nx-master-0 is ready..............  SUCCESS
+ · Check master node eu46-qj5nx-master-1 is ready..............  SUCCESS
+ · Check master node eu46-qj5nx-master-2 is ready..............  SUCCESS
+ · Check the internal registry is up and running...............  SUCCESS
+ Checking required artifacts:
+ · Project 'ubi-echo' exists in student's GitHub fork..........  SUCCESS
+ Checking for conflicts with existing OpenShift projects:
+ · Project 'oldwey-docker-build' is absent.....................  SUCCESS
+
+Setting up the classroom for GE: Deploying an Application to an OpenShift Cluster
+
+ · Download exercise files.....................................  SUCCESS
+ · Download solution files.....................................  SUCCESS
+
+Overall start status...........................................  SUCCESS
+
+[student@workstation sshl]$ git checkout -b docker-build
+fatal: not a git repository (or any of the parent directories): .git
+[student@workstation sshl]$ ls
+DO288-apps
+[student@workstation sshl]$ cd DO288-apps/
+[student@workstation DO288-apps]$ git checkout -b docker-build
+Switched to a new branch 'docker-build'
+[student@workstation DO288-apps]$ git push -u origin docker-build
+Gtk-Message: 13:03:21.485: Failed to load module "canberra-gtk-module"
+Gtk-Message: 13:03:33.666: Failed to load module "canberra-gtk-module"
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/gitish/DO288-apps.git
+   d3b6fa2..f355431  docker-build -> docker-build
+Branch 'docker-build' set up to track remote branch 'docker-build' from 'origin'.
+[student@workstation DO288-apps]$ oc status
+In project sourav-1 on server https://api.eu46.prod.nextcle.com:6443
+
+You have no services, deployment configs, or build configs.
+Run 'oc new-app' to create an application.
+[student@workstation DO288-apps]$ cd ..
+[student@workstation sshl]$ oc status
+In project sourav-1 on server https://api.eu46.prod.nextcle.com:6443
+
+You have no services, deployment configs, or build configs.
+Run 'oc new-app' to create an application.
+[student@workstation sshl]$ oc projects
+You have one project on this server: "sourav-1".
+
+Using project "sourav-1" on server "https://api.eu46.prod.nextcle.com:6443".
+[student@workstation sshl]$ oc get all
+No resources found in sourav-1 namespace.
+[student@workstation sshl]$ ls DO288-apps/ubi-echo/
+Dockerfile
+[student@workstation sshl]$ cat DO288-apps/ubi-echo/Dockerfile 
+FROM registry.access.redhat.com/ubi8/ubi:8.0
+USER 1001
+CMD bash -c "while true; do echo test; sleep 5; done"
+[student@workstation sshl]$ #oc new-app --name https://github.com/gitish/DO288-apps
+[student@workstation sshl]$ ##oc new-app --name https://github.com/gitish/DO288-app
+[student@workstation sshl]$ #oc new-app --name https://github.com/gitish/DO288-app
+[student@workstation sshl]$ oc new-app --name https://github.com/gitish/DO288-app#docker-build --context-dir ubi-echo
+error: You must specify one or more images, image streams, templates, or source code locations to create an application.
+
+To list all local templates and image streams, use:
+
+  oc new-app -L
+
+To search templates, image streams, and Docker images that match the arguments provided, use:
+
+  oc new-app -S php
+  oc new-app -S --template=ruby
+  oc new-app -S --image-stream=mysql
+  oc new-app -S --docker-image=python
+
+See 'oc new-app -h' for help and examples
+[student@workstation sshl]$ oc new-app --name https://github.com/gitish/DO288-apps#docker-build --context-dir ubi-echo
+error: You must specify one or more images, image streams, templates, or source code locations to create an application.
+
+To list all local templates and image streams, use:
+
+  oc new-app -L
+
+To search templates, image streams, and Docker images that match the arguments provided, use:
+
+  oc new-app -S php
+  oc new-app -S --template=ruby
+  oc new-app -S --image-stream=mysql
+  oc new-app -S --docker-image=python
+
+See 'oc new-app -h' for help and examples
+[student@workstation sshl]$ oc new-app --name echo https://github.com/gitish/DO288-apps#docker-build --context-dir ubi-echo
+--> Found container image 11f9dba (2 years old) from registry.access.redhat.com for "registry.access.redhat.com/ubi8/ubi:8.0"
+
+    Red Hat Universal Base Image 8 
+    ------------------------------ 
+    The Universal Base Image is designed and engineered to be the base layer for all of your containerized applications, middleware and utilities. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.
+
+    Tags: base rhel8
+
+    * An image stream tag will be created as "ubi:8.0" that will track the source image
+    * A Docker build using source code from https://github.com/gitish/DO288-apps#docker-build will be created
+      * The resulting image will be pushed to image stream tag "echo:latest"
+      * Every time "ubi:8.0" changes a new build will be triggered
+
+--> Creating resources ...
+    imagestream.image.openshift.io "ubi" created
+    imagestream.image.openshift.io "echo" created
+    buildconfig.build.openshift.io "echo" created
+    deployment.apps "echo" created
+--> Success
+    Build scheduled, use 'oc logs -f buildconfig/echo' to track its progress.
+    Run 'oc status' to view your app.
+[student@workstation sshl]$ cat ~/.v
+.viminfo     .vimrc       .vscode-oss/ 
+[student@workstation sshl]$ cat ~/.v
+.viminfo     .vimrc       .vscode-oss/ 
+[student@workstation sshl]$ cat ~/.vimrc
+autocmd FileType yaml setlocal ai ts=2 sw=2 et nu cuc
+[student@workstation sshl]$ cat history
+cat: history: No such file or directory
+[student@workstation sshl]$ history
+   66  podman stop sleep
+   67  podman rm sleep
+   68  oc whoami
+   69  oc new-projecct $DEV_USER-externaal-registrry
+   70  oc new-project $DEV_USER-externaal-registrry
+   71  oc new-app --name sleep --doccker-image quay.io/$QUAY_USER/ubi-sleep:1.0
+   72  oc new-app --name sleep --docker-image quay.io/$QUAY_USER/ubi-sleep:1.0
+   73  eccho $XDG_RUMTIME_DIR
+   74  echo $XDG_RUMTIME_DIR
+   75  echo $XDG_RUNTIME_DIR
+   76  cat "\$XDG_RUNTIME_DIR/containers/auth.json" 
+   77  cat "$XDG_RUNTIME_DIR/containers/auth.json" 
+   78  oc create secret generic quayio --from-file .dockeerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson
+   79  oc create secret generic quayio --from-file .dockerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson
+   80  oc secret link default quayio --for pull
+   81  oc get sa
+   82  oc new-app --name sleep --docker-image quay.io/$QUAY_USER/ubi-sleep:1.0
+   83  echo "oc create secret generic quayio --from-file .dockerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson" >>~/oc_commands.txt 
+   84  echo "oc secret link default quayio --for pull" >> oc_commands.txt 
+   85  oc get podss
+   86  oc get pods
+   87  oc logs sleep-6686f95b4-w9z8c
+   88  oc delete project $DEV_USER-externaal-registrry
+   89  skopeo delete docker://quay.io/$QUAY_USER/ubi-sleep:1.0
+   90  lab external-registry finish
+   91  lab image-stream start 
+   92  oc new-project $DEV_USER-common
+   93  oc login -u $DEV_USER -p $DEV_PASS $MASTER
+   94  oc new-project $DEV_USER-common
+   95  skopeo inspect docker://quay.io/redhattraining/hello-world/nginx 
+   96  podman login -u $QUAY_USER quay.io
+   97  skopeo inspect docker://quay.io/redhattraining/hello-world/nginx 
+   98  skopeo inspect docker://quay.io/redhattraining/hello-world-nginx 
+   99  skopeo inspect docker://quay.io/redhattraining/hello-world-nginx  | jq '.Name,.Tag,.Digest,.RepoTags'
+  100  oc import-image hello-world --confirm --from quay.io/redhattraining/hello-world-nginx
+  101  oc get is
+  102  oc get istag
+  103  os describe is/hello-world
+  104  oc describe is/hello-world
+  105  echo "oc import-image hello-world --confirm --from quay.io/redhattraining/hello-world-nginx" >> ~/oc_commands.txt 
+  106  echo "oc get istag" >> ~/oc_commands.txt 
+  107  echo "oc get is" >> ~/oc_commands.txt 
+  108  oc new-project $DEV_USER-image-stream
+  109  oc new-app --hello -i $DEV_USER-common/hello-world
+  110  oc new-app --name hello -i $DEV_USER-common/hello-world
+  111  echo  "oc new-app --name hello -i $DEV_USER-common/hello-world" >> oc_commands.txt 
+  112  oc  get  pod
+  113  oc logs hello-6599bb7b9c-jrc8p
+  114  oc get svc
+  115  oc get route svc/hello
+  116  oc expose svc/hello
+  117  oc get rroute 
+  118  oc get route 
+  119  curl hello-oldwey-image-stream.apps.eu46.prod.nextcle.com
+  120  oc get projects
+  121  oc project 
+  122  oc project --help
+  123  oc get projects
+  124  oc project oldwey-common
+  125  oc delete project oldwey-common
+  126  oc delete project oldwey-image-sstream
+  127  oc delete project oldwey-image-stream
+  128  lab image-stream finish
+  129  lab expose-image start
+  130  ls DO288/labs/expose-image/php-info/
+  131  skopeo copy  oci:DO288/labs/expose-image/php-info/ docker://quay.io/$QUAY_USER/php-info
+  132  oc new-project $DEV_USER-common
+  133  oc create secret generic quayio --from-file .dockerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson
+  134  oc import-image php-info --confirm --reference-policy local --from quay.io/$QUAY_USER/php-info
+  135  oc get idtag
+  136  oc get istag
+  137  oc describe is/php-info
+  138  oc get is
+  139  oc new-project $DEV_USER-expose-imgae
+  140  oc delete project $DEV_USER-expose-imgae
+  141  oc delete project $DEV_USER-expose-image
+  142  oc new-project $DEV_USER-expose-image
+  143  oc policy add-role-to-group  registry-viewer system:serviceaccounts:$DEV_USER-expose-imgae -n $DEV_USER-common
+  144  oc policy add-role-to-group  registry-viewer system:serviceaccounts:$DEV_USER-expose-image -n $DEV_USER-common
+  145  echo "oc policy add-role-to-group  registry-viewer system:serviceaccounts:$DEV_USER-expose-image -n $DEV_USER-common" >> ~/oc_commands.txt 
+  146  cp oc_commands.txt oc_commands.txt.bkp
+  147  pw
+  148  pwd
+  149  oc new-app --name info -i $DEV_USER-common-php-info
+  150  oc new-app --name info -i $DEV_USER-common/php-info
+  151  oc get pos
+  152  oc get pods
+  153  echo "oc new-app --name info -i $DEV_USER-common/php-info" >> oc_commands.txt
+  154  oc get svc
+  155  oc expose svc/info
+  156  oc get route
+  157  curl info-oldwey-expose-image.apps.eu46.prod.nextcle.com
+  158  lab expose-image grade
+  159  oc get projects
+  160  oc delete project oldwey-common
+  161  oc delete project oldwey-expose-image
+  162  lab expose-image finish
+  163  cat .bashrc 
+  164  cat /usr/local/etc/ocp4.config
+  165  cat ~/pat 
+  166  lab manage-builds start
+  167  cd DO288-apps/
+  168  git checkout main
+  169  git checkout -b manage-builds
+  170  cat ~/pat
+  171  git checkout -u origin manage-builds 
+  172  git push -u origin manage-builds 
+  173  l
+  174  lss
+  175  ls
+  176  cd java-serverhost/
+  177  ls
+  178  vim src/main/java/com/redhat/training/example/javaserverhost/rest/ServerHostEndPoint.java 
+  179  oc new-project $DEV_USER-manage-builds
+  180  oc login -u $DEV_USER -p $DEV_PASS $MASTER
+  181  oc new-project $DEV_USER-manage-builds
+  182  cat /usr/local/etc/ocp4.config 
+  183  on new-app --name jhost --build-env MAVEN_MIRROR_URL=http://$NEXUS/repository/java -i redhat-openjdk18-openshift:1.8 https://github.com/$GT_USER/DO288-apps#manage-builds --context-dir java-serverhost
+  184  oc new-app --name jhost --build-env MAVEN_MIRROR_URL=http://$NEXUS/repository/java -i redhat-openjdk18-openshift:1.8 https://github.com/$GT_USER/DO288-apps#manage-builds --context-dir java-serverhost
+  185  oc logs bc/jhost
+  186  oc logs -f bc/jhost
+  187  oc get pods
+  188  oc get svc
+  189  oc expose ssvc/jhost
+  190  oc expose svc/jhost
+  191  oc get route
+  192  curl jhost-oldwey-manage-builds.apps.eu46.prod.nextcle.com
+  193  oc get builds
+  194  oc get bc
+  195  git lot
+  196  git log
+  197  ls
+  198  vim src/main/java/com/redhat/training/example/javaserverhost/rest/ServerHostEndPoint.java 
+  199  git status
+  200  git commit -am "Changed version"
+  201  git push
+  202  oc get builds
+  203  oc start-build jhost 
+  204  oc get builds
+  205  oc get pods
+  206  oc get builds
+  207  curl jhost-oldwey-manage-builds.apps.eu46.prod.nextcle.com
+  208  oc get build
+  209  oc get bc
+  210  git log
+  211  oc get projects
+  212  curl jhost-oldwey-manage-builds.apps.eu46.prod.nextcle.com
+  213  oc delete project oldwey-manage-builds
+  214  lab manage-builds finish
+  215  lab trigger-builds staart
+  216  lab trigger-builds start
+  217  oc new-project trigger-builds
+  218  oc delete project trigger-builds
+  219  oc delete project $DEV_USER-trigger-builds
+  220  oc new-project $DEV_USER-trigger-builds
+  221  podman login -u $QUAY_USER quay.io
+  222  cd ~/DO288/labs/trigger-builds/
+  223  ls
+  224  skopeo copy oci-archive:php-73-ubi8-original.tar.gz http://docker/quay.io/$QUAY_USER/php-73-ubi8:latest
+  225  skopeo copy oci-archive:php-73-ubi8-original.tar.gz docker://quay.io/$QUAY_USER/php-73-ubi8:latest
+  226  echo "skopeo copy oci-archive:php-73-ubi8-original.tar.gz docker://quay.io/$QUAY_USER/php-73-ubi8:latest" >> ~/oc_commands.txt
+  227  oc create secret generic quay-registry --from-file .dockerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson
+  228  oc secrets link builder quay-registry
+  229  echo "oc secrets link builder quay-registry" >> ~/oc_commands.txt
+  230  oc import-image php --from quay.io/$QUAY_USER/php-73-ubi8 --confirm
+  231  oc get is
+  232  oc describe is/php
+  233  oc new-app --name trigger -i php http://github.com/$GT_USER/DO288-apps --context-dir trigger-builds
+  234  oc logs -f bc/trigger
+  235  oc get pods
+  236  oc describe bc/trigger | grep Triggered
+  237  ls
+  238  skopeo copy oci-archive:php-73-ubi8-newer.tar.gz docker://quay.io/$QUAY_USER/php-73-ubi8:latest
+  239  oc import-image php
+  240  oc get builds
+  241  oc describe bc/trigger | grep Triggered
+  242  oc describe build triiger-1 | grep Triggered
+  243  oc describe build trigger-1 | grep Triggered
+  244  oc describe build trigger-1 | grep cause
+  245  oc describe build trigger-2 | grep cause
+  246  echo "oc describe build trigger-2 | grep cause" >> ~/oc_commands.txt
+  247  skopeo delete  docker://quay.io/$QUAY_USER/php-73-ubi8
+  248  oc get projects
+  249  oc delete oldwey-trigger-builds
+  250  oc delete project oldwey-trigger-builds
+  251  lab trigger-builds finish
+  252  lab post-commit start
+  253  oc status
+  254  oc get projjjjjjjjjjjjjjjects
+  255  oc get projects
+  256  oc project $DEV_USER-post-commit
+  257  oc new-app --name hook --context-dir post-commit -i php:7.3 http://githib.com/$GT_USER/DO288-apps
+  258  oc new-app --name hook --context-dir post-commit -i php:7.3 http://github.com/$GT_USER/DO288-apps
+  259  oc get pods
+  260  oc logs -f bc/hook
+  261  oc get pods
+  262  cat ~/DO288/labs/post-commit/create-hook.sh 
+  263   ~/DO288/labs/post-commit/create-hook.sh 
+  264  oc describe bc/hook | grep Post
+  265  oc start-build bc/hook
+  266  oc logs -f bc/hook
+  267  oc get pods
+  268  oc get builds
+  269  oc set env bc/hook DEVELOPER="Sourav Gulati"
+  270  oc set env bc/hook --list
+  271  oc start-build bc/hook
+  272  oc logs -f bc/hook
+  273  oc get route
+  274  firefox http://builds-for-managers-oldwey-post-commit.apps.eu46.prod.nextcle.com
+  275  lab post-commit finish
+  276  lab build-app start
+  277  oc new-project $DEV_USER-build-app
+  278  cat ~/DO288/labs/build-app/oc-new-app.sh 
+  279  ~/DO288/labs/build-app/oc-new-app.sh 
+  280  oc get buildss
+  281  oc get builds
+  282  oc logs -f bc/simple
+  283  oc get builds
+  284  oc edit bc/simple
+  285  oc set env bc/simple npm_config_registry=https://$NEXUS/repository/nodejs
+  286  oc set env bc/simple --list
+  287  oc start-build simple
+  288  oc logs -f bc/simple
+  289  oc start-build simple
+  290  oc logs -f bc/simple
+  291  oc set env bc/simple --list
+  292  oc set env bc/simple npm_config_registry=http://$NEXUS/repository/nodejs
+  293  oc set env bc/simple --list
+  294  oc start-build simple
+  295  oc logs -f bc/simple
+  296  oc get pos
+  297  oc get pods
+  298  oc get svc
+  299  oc expose svc/simple
+  300  oc get route
+  301  curl simple-oldwey-build-app.apps.eu46.prod.nextcle.com
+  302  oc desscribe bc/simple | grep -A4 Webhook
+  303  oc describe bc/simple | grep -A4 Webhook
+  304  oc get -o json bc/simple | jq '.spec.Triggers'
+  305  oc get -o json bc/simple | jq '.spec.triggers'
+  306  curl -X POST -k https://api.eu46.prod.nextcle.com:6443/apis/build.openshift.io/v1/namespaces/oldwey-build-app/buildconfigs/simple/webhooks/cNj5-IAPDEIPyz4sFFhY/generic
+  307  oc describe bc/simple | grep -A4 Webhook
+  308  curl -X POST -k https://api.eu46.prod.nextcle.com:6443/apis/build.openshift.io/v1/namespaces/oldwey-build-app/buildconfigs/simple/webhooks/cNj5-IAPDEIPyz4sFFhY/generic
+  309  oc describe bc/simple | grep -A4 Webhook
+  310  oc get builds
+  311  oc get pods
+  312  lab build-app grade
+  313  lab build-app finish
+  314  echo $M
+  315  cat /usr/local/etc/ocp4.config 
+  316  echo $QUAY_USER$
+  317  echo $QUAY_USER
+  318  echo $Master
+  319  echo $ASTER
+  320  echo $MASTER
+  321  whoami
+  322  cat ~/.bashrc 
+  323  xmllint
+  324  whoami
+  325  oc whoami 
+  326  oc whoami
+  327  oc login
+  328  oc whoami 
+  329  oc api-resources 
+  330  oc api-resources | les
+  331  oc api-resources | less
+  332  oc api-resources 
+  333  while true; do echo "alive"; done;
+  334  while true; do echo "alive"; sleep 2s; done;
+  335  oc pods
+  336  while true; do echo "alive"; sleep 2s; done;
+  337  cd /home/student/DO288/
+  338  ls
+  339  cd ..
+  340  cd DO288-apps/
+  341  ls -lrt
+  342  cd hello-java/
+  343  ls -lrt
+  344  cd app-src/
+  345  ls
+  346  cd src/
+  347  ls -lrt
+  348  d main/
+  349  ls -lrt
+  350  cd ..
+  351  cat pom.xml 
+  352  cd ..
+  353  git status
+  354  git branch -a
+  355  cat pat
+  356  cd ~/
+  357  cat pat
+  358  oc get-all
+  359  oc get all
+  360  oc status
+  361  cd /home/student/DO288-apps/
+  362  cd ubi-echo/
+  363  ls -rt
+  364  lsl -lrt
+  365  ls -lrt
+  366  cat Dockerfile 
+  367  oc new-app --name echo https://github.com/sgulati89/DO288-apps#docker-build --context-dir ubi-echo
+  368  OC GET BC
+  369  oc get bc
+  370  oc get events
+  371  oc login -u $DEV_USER -p $DEV_PASS $MASTER
+  372  cat ~/.bashrc
+  373  cat /usr/local/etc/ocp4.config
+  374  oc get bc
+  375  cd 
+  376  ls
+  377  cat oc_commands.txt
+  378  oc get is
+  379  oc get pods
+  380  git status
+  381  lab docker-build finish
+  382  cd DO288-apps/
+  383  ]git checkout main
+  384  git checkout main
+  385  cat s2i-scripts/
+  386  cat s2i-scripts/index.html 
+  387  ls -a s2i-scripts/
+  388  ls -a s2i-scripts/.s2i/
+  389  ls -a s2i-scripts/.s2i/bin/
+  390  cat s2i-scripts/.s2i/bin/
+  391  cat s2i-scripts/.s2i/bin/assemble 
+  392  oc new-project $DEV_USER-s2i-scripts
+  393  oc new-app --name bonjour httpd:2.4~https://github.com/$GT_USER/DO288-apps --context-dir s2i-scripts
+  394  oc get pods
+  395  oc expose svc/bonjour
+  396  oc get route
+  397  curl bonjour-oldwey-s2i-scripts.apps.eu46.prod.nextcle.com
+  398  curl bonjour-oldwey-s2i-scripts.apps.eu46.prod.nextcle.com/info.html
+  399  oc logs deployment/bonjour | tail -2
+  400  oc get projects
+  401  oc delete project oldwey-s2i-scripts
+  402  poddman ps
+  403  podman ps
+  404  podman stop d6ff3672cb0f
+  405  podman ps
+  406  podman ps -a
+  407  podman rm -f d6ff3672cb0f
+  408  podman ps -a
+  409  lab s2i-scripts finish
+  410  oc get is -openshift | les
+  411  oc get is -openshift | less
+  412  oc get is -n openshift | less
+  413  oc describe is/perl -n openshift
+  414  lab apache-s2i sstart
+  415  lab apache-s2i start
+  416  s2i version
+  417  s2i --help
+  418  s2i create s2i-do288-httpd s2i-do288-httpd
+  419  tree s2i-do288-httpd/
+  420  rm s2i-do288-httpd/Dockerfile 
+  421  cp ~/DO288/labs/apache-s2i/Containerfile  s2i-do288-httpd/
+  422  cp -Rv  ~/DO288/labs/apache-s2i/s2i/  s2i-do288-httpd/
+  423  rm s2i-do288-httpd/s2i/bin/save-artifacts 
+  424  cd s2i-do288-httpd/
+  425  podman build -t s2i-do288-httpd .
+  426  podman images
+  427  cat ~/DO288/labs/apache-s2i/index.html 
+  428  cp ~/DO288/labs/apache-s2i/index.html test/test-app/
+  429  mkdir ~/s2i-sample-app
+  430  s2i build --help
+  431  s2i build test/test-app/ s2i-do288-httpd s2i-sample-app --as-dockerfile ~/s2i-sample-app/Containerfile
+  432  echo "s2i build test/test-app/ s2i-do288-httpd s2i-sample-app --as-dockerfile ~/s2i-sample-app/Containerfile" >> ~/oc_commands.txt
+  433  cd ~/s2i-sample-app/
+  434  tree
+  435  podman build -t s2i-sample-app .
+  436  podman images
+  437  podman run --name test -u 1234 -p 8080:8080 -d s2i-sample-app
+  438  podman ps
+  439  cutl localhost:8080
+  440  curl localhost:8080
+  441  podman stop test
+  442  podman login -u $QUAY_USER quay.io
+  443  skopeo copy ccontainers-storage:localhost/s2i-do288-httpd docker://quay.io/$QUAY_USER/s2i-do288-httpd
+  444  skopeo copy containers-storage:localhost/s2i-do288-httpd docker://quay.io/$QUAY_USER/s2i-do288-httpd
+  445  echo "skopeo copy containers-storage:localhost/s2i-do288-httpd docker://quay.io/$QUAY_USER/s2i-do288-httpd" ~/oc_commands.txt
+  446  echo "skopeo copy containers-storage:localhost/s2i-do288-httpd docker://quay.io/$QUAY_USER/s2i-do288-httpd" >>   ~/oc_commands.txt
+  447  on new-project $DEV_USER-apache-s2i
+  448  oc new-project $DEV_USER-apache-s2i
+  449  oc create secret generic quayio --from-file .dockerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson
+  450  echho "oc create secret generic quayio --from-file .dockerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson" >> ~/oc_commands.txt
+  451  echo "oc create secret generic quayio --from-file .dockerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson" >> ~/oc_commands.txt
+  452  oc secrets link builder quayio
+  453  echo "oc secrets link builder quayio" >> ~/oc_commands.txt
+  454  oc import-image s2i-do288-httpd --from quay.io/sorav_gulati/s2i-do288-httpd --confirm
+  455  echo "oc import-image s2i-do288-httpd --from quay.io/sorav_gulati/s2i-do288-httpd --confirm" >> ~/oc_commands.txt
+  456  oc get is
+  457  oc new-app --name hello-s2i s2i-do288-httpd~https://github.com/$GT_USER/DO288-apps --context-dir html-helloworld
+  458  oc log -f bc/hello-s2i
+  459  oc logs -f bc/hello-s2i
+  460  oc get pods
+  461  oc get svc
+  462  oc expose svc/hello-s2i
+  463  oc get route
+  464  curl hello-s2i-oldwey-apache-s2i.apps.eu46.prod.nextcle.com
+  465  oc get projectss
+  466  oc get projects
+  467  oc delete project oldwey-apache-s2i
+  468  podman ps -a
+  469  podman rm test
+  470  lab apache-s2i finish
+  471  pwd
+  472  cd ~/DO288-apps/
+  473  ls
+  474  git status
+  475  git branch 
+  476  git stassh
+  477  git stash
+  478  mkdir ~/tmp
+  479  mv s2i-do288-httpd/ ~/tmp
+  480  lab apache-s2i finish
+  481  lab custom-s2i start
+  482  cd ~/DO288/labs/custom-s2i/
+  483  ls
+  484  vi Dockerfile 
+  485  lab s2i-scripts start
+  486  podman run --name test --it rhscl/httpd-24-rhel7 bash
+  487  podman run --name test -it rhscl/httpd-24-rhel7 bash
+  488  cd DO288/labs/custom-s2i/
+  489  ls
+  490  vi Dockerfile 
+  491  podman build -t s2-do288-go .
+  492  vi Dockerfile 
+  493  ls
+  494  vi Dockerfile 
+  495  podman build -t s2-do288-go .
+  496  ls test/test-app/
+  497  mkdir -p ~/s2i-go-app
+  498  s2i build test/test-app/ s2i-do288-go s2i-go-app --as-dockerfile ~/s2i-go-app/Dockerfile
+  499  cd ~/s2i-go-app/
+  500  ls
+  501  podman build -t s2i-go-app .
+  502  podman images
+  503  cd -
+  504  podman build -t s2i-do288-go .
+  505  podman images
+  506  cd ~/s2i-go-app/
+  507  podman build -t s2i-do288-go .
+  508  podman build -t s2i-go-app .
+  509  podman run --name go-test -u 1234 -p 8080:8080 -d s2i-go-app
+  510  podman ps
+  511  curl http:/localhost:8080
+  512  curl http:/localhost:8080/sourav
+  513  podman login -u $QUAY_USER quay.io
+  514  skopeo copy containers-storage:localhost/s2i-do288-go docker://quay.io/$QUAY_USER/s2i-do288-go
+  515  oc new-project $DEV_USER-custom-s2i
+  516  oc create secret generic quayio --from-file .dockerconfigjson=$XDG_RUNTIME_DIR/containers/auth.json --type=kubernetes.io/dockerconfigjson
+  517  oc secret link builder quayio
+  518  oc secret link buildser quayio
+  519  oc secrets link builder quayio
+  520  oc import-image s2i-do288-go --from quay.io/sorav_gulati/s2i-do288-go --confirm
+  521  oc get is
+  522  cd ~/DO288-apps/
+  523  git checkout main
+  524  git checkout -b custom-s2i
+  525  cat ~/pat
+  526  git push -u origin custom-s2i
+  527  oc new-app --name greet s2i-do288-go~https://github.com/$GT_USER/DO288-apps#custom-s2i  --context-dir go-hello
+  528  oc logs -f bc/greet
+  529  oc get is
+  530  oc  get  pods
+  531  oc getsvc
+  532  oc get svc
+  533  oc expose svc/greet
+  534  oc get route
+  535  curl greet-oldwey-custom-s2i.apps.eu46.prod.nextcle.com
+  536  curl greet-oldwey-custom-s2i.apps.eu46.prod.nextcle.com/sg
+  537  ls
+  538  mkdir -p go-hello/.s2i/bin
+  539  cp ~/DO288/labs/custom-s2i/s2i/bin/run go-hello/.s2i/bin/
+  540  cat go-hello/.s2i/bin/run 
+  541  vi go-hello/.s2i/bin/run 
+  542  cat go-hello/.s2i/bin/run 
+  543  git status
+  544  git add go-hello/.s2i/
+  545  git commit-m "Spanish greeting"
+  546  git commit -m "Spanish greeting"
+  547  git push
+  548  oc start-build greet
+  549  oc get builds
+  550  oc logs -f bc/greet
+  551  oc get builds
+  552  curl greet-oldwey-custom-s2i.apps.eu46.prod.nextcle.com
+  553  curl greet-oldwey-custom-s2i.apps.eu46.prod.nextcle.com/sg
+  554  lab custom-s2i grade
+  555  oc get projects
+  556  oc delete project oldwey-custom-s2i
+  557  podman ps
+  558  podman stop go-test
+  559  podman rm go-test
+  560  lab custom-s2i finish
+  561  ls
+  562  oc describe deployment/echo
+  563  oc get all
+  564  oc get pods
+  565  oc logs echo-6f9f78b5db-4xn5r 
+  566  oc logs pod/echo-d47d79cf4-2b4m5
+  567  oc logs echo-d47d79cf4-2b4m5
+  568  lab docker-build start
+  569  cd DO288-apps/
+  570  git status
+  571  git branch
+  572  git checkout docket-build
+  573  git checkout docker-build
+  574  git branch
+  575  ls
+  576  ls -lrt
+  577  git status
+  578  oc status
+  579  oc  get all
+  580  oc new-project $U-docker-build
+  581  oc new-project $DEV_USER-docker-build
+  582  oc get all
+  583  ls ubi-echo/
+  584  cat ubi-echo/Dockerfile 
+  585  oc new-app --name echo https://github.com/sgulati89/DO288-apps#docker-build --context-dir ubi-echo
+  586  oc status
+  587  oc get all
+  588  oc logs -f bc/echo
+  589  oc get bc
+  590  oc get is
+  591  oc edit bc/echo
+  592  oc get events
+  593  oc get events--sort-by='.lastTimestamp'
+  594  oc get events --sort-by='.lastTimestamp'
+  595  oc get bc
+  596  clear
+  597  oc get bc
+  598  oc get bc, is
+  599  oc get bc,is
+  600  cls
+  601  clear
+  602  oc describe bc/echo
+  603  clear
+  604  oc describe is/echo
+  605  cd ubi-echo/
+  606  vim Dockerfile 
+  607  cat Dockerfile 
+  608  git status
+  609  git add .
+  610  git status
+  611  git commit -m "new build for echo with iterator added to echo"
+  612  git status
+  613  git push 
+  614  cat ~/pat 
+  615  git push 
+  616  git status
+  617  cd
+  618  oc get bc
+  619  oc get pods
+  620  oc start-build echo
+  621  oc get pods
+  622  oc logs echo-d47d79cf4-2b4m5 
+  623  clear
+  624  oc logs bc/echo
+  625  clear
+  626  oc get all
+  627  oc get projects
+  628  oc get project
+  629  oc get pod
+  630  oc get pods
+  631  clear
+  632  oc describe is/echo
+  633  oc delete all -l app=echo
+  634  clear
+  635  oc get all
+  636  git status
+  637  cd DO288-apps/ubi-echo/
+  638  git status
+  639  lab docker-build finish 
+  640  oc get all
+  641  oc get project
+  642  oc get projects
+  643  oc get all
+  644  oc login -u $DEV_USER -p $DEV_PASS $MASTER
+  645  oc get all
+  646  oc get projects
+  647  oc get apps
+  648  oc get app
+  649  oc get all app
+  650  oc get pods
+  651  oc get bc
+  652  oc get projects
+  653  oc project abc-test
+  654  oc get projects
+  655  oc get pods
+  656  oc get project
+  657  oc get projects
+  658  lab deploy-image start
+  659  grep -i wildcard /usr/local/etc/ocp4.config 
+  660  host foo.$WC
+  661  host bar.$WC
+  662  echo $WC
+  663  oc whoami
+  664  oc status
+  665  oc get project
+  666  oc new-project php-helloworld
+  667  oc get al
+  668  oc get all
+  669  oc status
+  670  oc get is
+  671  oc get is -n hello
+  672  oc get is -n openshift
+  673  oc get is -n openshift | grep spring
+  674  oc get is -n openshift | grep java
+  675  oc get is -n openshift | grep php
+  676  clear
+  677  oc describe is/php
+  678  clear
+  679  oc describe is/php -n openshift
+  680  oc describe is/php -n openshift | less
+  681  oc get pods
+  682  oc rsh php-hello-dockerfile-675c4c655d-ft59c
+  683  vi temp.properties
+  684  oc get pods
+  685  oc cp temp.properties php-hello-dockerfile-675c4c655d-ft59c:/var/tmp/temp.properties
+  686  oc rsh php-hello-dockerfile-675c4c655d-ft59c
+  687  ls -lrt
+  688  rm temp.properties 
+  689  ls -lrt
+  690  cat temp.properties
+  691  oc cp php-hello-dockerfile-675c4c655d-ft59c:/var/tmp/temp.properties .
+  692  oc cp php-hello-dockerfile-675c4c655d-ft59c:/var/tmp/temp.properties temp.properties
+  693  cat temp.properties
+  694  ls -lrt
+  695  ls /var/tmp/
+  696  ls -lrt /var/tmp/
+  697  lab source-build start
+  698  oc new-project $DEV_USER-source-build
+  699  oc get projects
+  700  cd DO288-apps/
+  701  git branch
+  702  git checkout -b source-build
+  703  git checkoutsource-build
+  704  git checkout source-build
+  705  git branch
+  706  oc new-app --name greet --build-env npm_config_registry=http://$NEXUS/repository/nodejs nodejs:12~https://github.com/$GT_USER/DO288-apps#source-build --context-dir noejs-helloworld
+  707  oc new-app --name greet --build-env npm_config_registry=http://$NEXUS/repository/nodejs nodejs:12~https://github.com/$GT_USER/DO288-apps#source-build --context-dir nodejs-helloworld
+  708  oc get svc
+  709  oc delete svc/greet
+  710  oc get pods
+  711  oc delete pod/greet-1-build
+  712  oc get bc
+  713  oc delete bc/greet
+  714  oc get is
+  715  oc delete all -l app=greet
+  716  oc get is
+  717  oc new-app --name greet --build-env npm_config_registry=http://$NEXUS/repository/nodejs nodejs:12~https://github.com/$GT_USER/DO288-apps#source-build --context-dir nodejs-helloworld
+  718  oc logs bc/greet
+  719  oc get projects
+  720  oc project oldwey-source-build 
+  721  oc get pods
+  722  cd DO288-apps/
+  723  python3 -m json.tool nodejs-helloworld/package.json 
+  724  oc start-build greet
+  725  oc get builds
+  726  oc expose svc/greet
+  727  oc get route
+  728  curl http://greet-oldwey-source-build.apps.eu46.prod.nextcle.com
+  729  lab source-build grade
+  730  lab source-build finish 
+  731  lab source-build grade
+  732  lab source-build finish 
+  733  pwd
+  734  cd ../../
+  735  ls
+  736  cd ..
+  737  cd labs/multicontainer-helm/
+  738  ls
+  739  cd famouschart/
+  740  ls
+  741  vi values.yaml 
+  742  vi Chart.yaml 
+  743  helm dependency  update
+  744  vi  values.yaml 
+  745  helm install famousapp .
+  746  ls
+  747  ooc get pods
+  748  oc get pods
+  749  oc get svc
+  750  oc expose svc/famousapp-mariadb
+  751  oc get route
+  752  oc get podss
+  753  oc get pods
+  754  curl famousapp-mariadb-oldwey-multicontaainer-helm.apps.eu46.prod.nextcle.com
+  755  curl famousapp-mariadb-oldwey-multicontaainer-helm.apps.eu46.prod.nextcle.com/index.html
+  756  famousapp-mariadb-oldwey-multicontaainer-helm.apps.eu46.prod.nextcle.com
+  757  FAMOUS_URL=$(oc get route \
+  758  -n ${RHT_OCP4_DEV_USER}-multicontainer-helm famousapp-famouschart \
+  759  -o jsonpath='{.spec.host}'/random)
+  760  pwd
+  761  vi templates/deployment.yaml 
+  762  cp ../../../solutions/multicontainer-helm/famouschart/templates/deployment.yaml .
+  763  vi templates/deployment.yaml 
+  764  oc get projects
+  765  oc delete project oldwey-multicontaainer-helm
+  766  oc new-project oldwey-multicontaainer-helm
+  767  oc get projectss
+  768  oc get projects
+  769  oc new-project oldwey-multicontaainer-helm
+  770  helm install famousapp .
+  771  oc get pods
+  772  oc get svc
+  773  oc expose svc/famousapp-mariadb
+  774  oc get route
+  775  curl famousapp-mariadb-oldwey-multicontaainer-helm.apps.eu46.prod.nextcle.com
+  776  firefox famousapp-mariadb-oldwey-multicontaainer-helm.apps.eu46.prod.nextcle.com
+  777  curl famousapp-mariadb-oldwey-multicontaainer-helm.apps.eu46.prod.nextcle.com
+  778  oc get pods
+  779  helm uninstall famousapp 
+  780  oc get pods
+  781  helm install famousapp .
+  782  oc get pods
+  783  lab multicontainer-helm finish
+  784  lab multicontainer-helm start
+  785  cd DO288/labs/multicontainer-helm/
+  786  ls
+  787  helm create famouschart
+  788  cd famouschart/
+  789  ls
+  790  tree
+  791  vim Chart.yaml 
+  792  vi values.yaml 
+  793  grep -A4 image: values.yaml 
+  794  pwd
+  795  cd ../../
+  796  ls
+  797  l
+  798  ls
+  799  cd ..
+  800  ls
+  801  cd solutions/
+  802  ls
+  803  cd multicontainer-helm/famouschart
+  804  ls
+  805  grep -A4 image: values.yaml 
+  806  vi values.yaml 
+  807  vim templates/deployment.yaml 
+  808  vi Chart.yaml 
+  809  cat values.yaml 
+  810  oc new-project  $DEV_USER-multicontaainer-helm
+  811  helm install famousapp .
+  812  ls
+  813  cd ..
+  814  ls
+  815  cd ..
+  816  ls
+  817  whoami
+  818  lab container-build start
+  819  cat DO288/labs/container-build/httpd-parent/Containerfile 
+  820  cd DO288-apps/
+  821  git branch
+  822  git chckout main
+  823  git checkout main
+  824  git branch
+  825  git checkout -b container-build
+  826  git branch
+  827  git branch -d container-build
+  828  git branch
+  829  git checkout -b container-build
+  830  git branch
+  831  git branch -d container-build
+  832  git chout main
+  833  git chekout main
+  834  git checkout main
+  835  git branch
+  836  git branch -d container-build
+  837  git push origin --delete container-build
+  838  cd /
+  839  find . pat
+  840  find . -name pat
+  841  find / -name pat
+  842  cat /home/student/pat 
+  843  cd /home/student/
+  844  cd DO288-apps/container-build/
+  845  git push origin --delete container-build
+  846  git branch
+  847  git checkout -b container-build
+  848  git push -u origin container-build
+  849  git branch
+  850  oc new-project $DEV_USER-container-build
+  851  pwd
+  852  cd ..
+  853  git branch
+  854  podman build --layers=false -t do288-apache ./container-build/
+  855  podman images
+  856  cat /usr/local/etc/ocp4.config 
+  857  podman tag do288-apache quay.io/$QUAY_USER/do288-apache
+  858  podman login -u $QUAY_USER quay.io
+  859  podman push quay.io/$QUAY_USER/do288-apache
+  860  oc get apps
+  861  oc get app
+  862  oc get projects
+  863  oc status
+  864  oc get bc
+  865  oc get projects
+  866  oc login -u $DEV_USER -p $DEV_PASS $MASTER
+  867  oc get projects
+  868  oc delete project/oldwey-multicontaainer-helm
+  869  oc get projects
+  870  cat /usr/local/etc/ocp4.config 
+  871  oc get pod
+  872  oc status
+  873  oc get app
+  874  oc new-app --name hola quay.io/$QUAY_USER/do288-apache
+  875  lab container-build start
+  876  oc get projects
+  877  oc delete project/oldwey-container-build
+  878  lab container-build start
+  879  lab container-build finish
+  880  lab container-build start
+  881  oc get is
+  882  lab container-build start
+  883  podman images
+  884  podman image rm localhost/do288-apache
+  885  lab container-build start
+  886  podman images
+  887  podman image rm quay.io/sourav_gulati/do288-apache
+  888  podman image rm quay.io/sorav_gulati/do288-apache
+  889  podman images
+  890  lab container-build start
+  891  oc get pods
+  892  oc delete all -l app=hola
+  893  oc get projects
+  894  podman rmi -a --force
+  895  lab container-build start
+  896  podman images
+  897  podman rmi -a --force
+  898  lab container-build start
+  899  podman images
+  900  oc get is
+  901  oc get is -n openshift
+  902  oc get is -n openshift | grep -i redhat
+  903  oc get is -n openshift | grep -i redhattraining
+  904  oc get is -n openshift | grep -i redhatraining
+  905  podman import-image redhattraining/httpd-parent
+  906  podman import image redhattraining/httpd-parent
+  907  podman importredhattraining/httpd-parent
+  908  podman import redhattraining/httpd-parent
+  909  lab container-build start
+  910  podman images
+  911  oc get projects
+  912  lab container-build finish
+  913  lab multicontainer-kustomize start
+  914  cd ~/DO288/labs/multicontainer-kustomize/
+  915  ls
+  916  grep kind: famous-quotes.yaml 
+  917  mkdir -pv famous-kustomize
+  918  ls
+  919  cd famous-kustomize/
+  920  mkdir -pv base
+  921  cpp ../famous-quotes.yaml base/deployment.yaml
+  922  cp ../famous-quotes.yaml base/deployment.yaml
+  923  vim base/kustomization.yaml
+  924  cat base/kustomization.yaml
+  925  vim base/deployment.yaml 
+  926  oc new-project $DEV_USER-multicontainer-kustomize
+  927  oc apply -k base
+  928  echo "oc apply -k base" >> ~/oc_commands.txt
+  929  oc get pods
+  930  oc get deployments
+  931  oc expose famousapp-famouschart
+  932  oc get route 
+  933  oc expose svc/famousapp-famouschart
+  934  oc get route 
+  935  curl famousapp-famouschart-oldwey-multicontainer-kustomize.apps.eu46.prod.nextcle.com
+  936  curl famousapp-famouschart-oldwey-multicontainer-kustomize.apps.eu46.prod.nextcle.com/random
+  937  mkdir -p overlays/dev
+  938  vim overlays/dev/relica_limits.yaml
+  939  oc create deployment famousapp-famouschart --dry-run -o yaml
+  940  oc create deployment famousapp-famouschart --dry-run --image test -o yaml
+  941  vim overlays/dev/relica_limits.yaml
+  942  vim overlays/dev/kustomization.yaml
+  943  cat overlays/dev/kustomization.yaml
+  944  oc apply -k overlays/dev
+  945  cd overlays/dev/
+  946  s
+  947  ls
+  948  mv relica_limits.yaml replica_limits.yaml 
+  949  cd ../../
+  950  oc apply -k overlays/dev/
+  951  oc get deployments
+  952  cd overlays/dev/
+  953  ls
+  954  vi replica_limits.yaml 
+  955  oc get deployments | grep famousapp-famouschart
+  956  vi replica_limits.yaml 
+  957  vi kustomization.yaml 
+  958  cd ../../base
+  959  ls
+  960  cd -
+  961  pwd
+  962  oc apply -k 
+  963  oc apply -k .
+  964  cd ../../base
+  965  pwd
+  966  cd -
+  967  vi kustomization.yaml 
+  968  oc apply -k .
+  969  vi kustomization.yaml 
+  970  oc apply -k .
+  971  oc get deploymentss
+  972  oc get deployments
+  973  vi kustomization.yaml 
+  974  vi replica_limits.yaml 
+  975  oc apply -k .
+  976  vi replica_limits.yaml 
+  977  oc apply -k .
+  978  curl famousapp-famouschart-oldwey-multicontainer-kustomize.apps.eu46.prod.nextcle.com/random
+  979  o get deployments famousapp-famouschart
+  980  oc get deployments famousapp-famouschart
+  981  oc get deployments famousapp-famouschart -o json
+  982  oc get deployments famousapp-famouschart -o jsonpath='{.spec.template.spec}'
+  983  oc get deployments famousapp-famouschart -o jsonpath='{.spec.template.spec.containers[0]}'
+  984  oc get deployments famousapp-famouschart -o jsonpath='{.spec.template.spec.containers[0].resouces}'
+  985  oc get deployments famousapp-famouschart -o jsonpath='{.spec.template.spec.containers[0].resources}'
+  986  cd ..
+  987  cp -r dev/ stage
+  988  vim stage/replica_limits.yaml 
+  989  oc apply -k stage
+  990  oc get deployments famousapp-famouschart -o jsonpath='{.spec.template.spec.containers[0].resources}'
+  991   
+  992  cp -r stage/ prod
+  993   
+  994  curl famousapp-famouschart-oldwey-multicontainer-kustomize.apps.eu46.prod.nextcle.com/random
+  995  oc apply -k prod
+  996  curl famousapp-famouschart-oldwey-multicontainer-kustomize.apps.eu46.prod.nextcle.com/random
+  997  oc get deployments famousapp-famouschart -o jsonpath='{.spec.template.spec.containers[0].resources}'
+  998  lab multicontainer-kustomize grade
+  999  lab multicontainer-kustomize finish
+ 1000  oc get projects
+ 1001  lab-configure
+ 1002  ls
+ 1003  cat /usr/local/etc/ocp4.config 
+ 1004  vi /usr/local/etc/ocp4.config 
+ 1005  ls
+ 1006  cat /usr/local/etc/ocp4.config
+ 1007  echo $RHT_OCP4_MASTER_API
+ 1008  oc login -u $RHT_OCP4_DEV_USER -p RHT_OCP4_DEV_PASSWORD
+ 1009  oc login -u $RHT_OCP4_DEV_USER -p $RHT_OCP4_DEV_PASSWORD
+ 1010  oc new-project sourav-1
+ 1011  ls
+ 1012  vim sh-pat
+ 1013  cat sh-pat
+ 1014  oc whoami
+ 1015  oc api-resources
+ 1016  lab docker-build start
+ 1017  ls
+ 1018  cd DO288-apps/
+ 1019  ls
+ 1020  ls -la
+ 1021  git branch -a
+ 1022  git status
+ 1023  git remote -v
+ 1024  cd ..
+ 1025  ls
+ 1026  mkdir sshl
+ 1027  ls
+ 1028  cd sshl
+ 1029  ls
+ 1030  git clone https://github.com/gitish/DO288-apps.git
+ 1031  ls
+ 1032  cd DO288-apps/
+ 1033  ls
+ 1034  git branch
+ 1035  git branch -a
+ 1036  cd ..
+ 1037  ls
+ 1038  lab docker-build stop
+ 1039  lab docker-build -h
+ 1040  lab docker-build finish
+ 1041  ls
+ 1042  cd sshl
+ 1043  ls
+ 1044  lab docker-build start
+ 1045  git checkout -b docker-build
+ 1046  ls
+ 1047  cd DO288-apps/
+ 1048  git checkout -b docker-build
+ 1049  git push -u origin docker-build
+ 1050  oc status
+ 1051  cd ..
+ 1052  oc status
+ 1053  oc projects
+ 1054  oc get all
+ 1055  ls DO288-apps/ubi-echo/
+ 1056  cat DO288-apps/ubi-echo/Dockerfile 
+ 1057  #oc new-app --name https://github.com/gitish/DO288-apps
+ 1058  ##oc new-app --name https://github.com/gitish/DO288-app
+ 1059  #oc new-app --name https://github.com/gitish/DO288-app
+ 1060  oc new-app --name https://github.com/gitish/DO288-app#docker-build --context-dir ubi-echo
+ 1061  oc new-app --name https://github.com/gitish/DO288-apps#docker-build --context-dir ubi-echo
+ 1062  oc new-app --name echo https://github.com/gitish/DO288-apps#docker-build --context-dir ubi-echo
+ 1063  cat ~/.vimrc
+ 1064  cat history
+ 1065  history
+[student@workstation sshl]$ oc get bc
+NAME   TYPE     FROM               LATEST
+echo   Docker   Git@docker-build   1
+[student@workstation sshl]$ oc edit bc/echo
+Edit cancelled, no changes made.
+[student@workstation sshl]$ oc get events --sort-by='.lastTimestamp'
+LAST SEEN   TYPE      REASON                         OBJECT                       MESSAGE
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-2wpfx" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-dh22l" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-xpk4d" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Normal    ScalingReplicaSet              deployment/echo              Scaled up replica set echo-5fd8fdb874 to 1
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-xsggz" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-gsq8q" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-5np4v" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-h54lf" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Warning   BuildConfigTriggerFailed       buildconfig/echo             error triggering Build for BuildConfig sourav-1/echo: Internal error occurred: build config sourav-1/echo has already instantiated a build for imageid registry.access.redhat.com/ubi8/ubi@sha256:8275e2ad7f458e329bdc8c0e7543cff1729998fe515a281d49638246de8e39ee
+14m         Warning   BuildConfigInstantiateFailed   buildconfig/echo             error instantiating Build from BuildConfig sourav-1/echo (0): Error resolving ImageStreamTag ubi:8.0 in namespace sourav-1: unable to find latest tagged image
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-lwldd" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   Error creating: Pod "echo-5fd8fdb874-57lzd" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+14m         Normal    Scheduled                      pod/echo-1-build             Successfully assigned sourav-1/echo-1-build to eu46-qj5nx-worker-0-kct89
+14m         Normal    AddedInterface                 pod/echo-1-build             Add eth0 [10.130.3.114/23]
+14m         Normal    Started                        pod/echo-1-build             Started container git-clone
+14m         Normal    Pulled                         pod/echo-1-build             Container image "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17d408aaf7b8a00c66895a1e50b3c8529be76a342cfa84c478fa2af72576f67f" already present on machine
+14m         Normal    Created                        pod/echo-1-build             Created container git-clone
+14m         Normal    BuildStarted                   build/echo-1                 Build sourav-1/echo-1 is now running
+14m         Normal    Started                        pod/echo-1-build             Started container manage-dockerfile
+14m         Normal    Created                        pod/echo-1-build             Created container manage-dockerfile
+14m         Normal    Pulled                         pod/echo-1-build             Container image "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17d408aaf7b8a00c66895a1e50b3c8529be76a342cfa84c478fa2af72576f67f" already present on machine
+14m         Normal    Pulled                         pod/echo-1-build             Container image "quay.io/openshift-release-dev/ocp-v4.0-art-dev@sha256:17d408aaf7b8a00c66895a1e50b3c8529be76a342cfa84c478fa2af72576f67f" already present on machine
+14m         Normal    Started                        pod/echo-1-build             Started container docker-build
+14m         Normal    Created                        pod/echo-1-build             Created container docker-build
+13m         Normal    SuccessfulCreate               replicaset/echo-7884649cd    Created pod: echo-7884649cd-vl5bj
+13m         Normal    Scheduled                      pod/echo-7884649cd-vl5bj     Successfully assigned sourav-1/echo-7884649cd-vl5bj to eu46-qj5nx-worker-0-ks9tk
+13m         Normal    ScalingReplicaSet              deployment/echo              Scaled up replica set echo-7884649cd to 1
+13m         Normal    BuildCompleted                 build/echo-1                 Build sourav-1/echo-1 completed successfully
+13m         Warning   FailedCreate                   replicaset/echo-5fd8fdb874   (combined from similar events): Error creating: Pod "echo-5fd8fdb874-w9z7r" is invalid: spec.containers[0].image: Invalid value: " ": must not have leading or trailing whitespace
+13m         Normal    AddedInterface                 pod/echo-7884649cd-vl5bj     Add eth0 [10.128.4.210/23]
+13m         Normal    Started                        pod/echo-7884649cd-vl5bj     Started container echo
+13m         Normal    Created                        pod/echo-7884649cd-vl5bj     Created container echo
+13m         Normal    Pulled                         pod/echo-7884649cd-vl5bj     Successfully pulled image "image-registry.openshift-image-registry.svc:5000/sourav-1/echo@sha256:7b17092291d17753d96635ad8fccd9975bb6ae359a772e9c1b89f312a274b62b" in 229.4052ms
+13m         Normal    Pulling                        pod/echo-7884649cd-vl5bj     Pulling image "image-registry.openshift-image-registry.svc:5000/sourav-1/echo@sha256:7b17092291d17753d96635ad8fccd9975bb6ae359a772e9c1b89f312a274b62b"
+13m         Normal    ScalingReplicaSet              deployment/echo              Scaled down replica set echo-5fd8fdb874 to 0
+[student@workstation sshl]$ oc get bc,is
+NAME                                  TYPE     FROM               LATEST
+buildconfig.build.openshift.io/echo   Docker   Git@docker-build   1
+
+NAME                                  IMAGE REPOSITORY                                                                  TAGS     UPDATED
+imagestream.image.openshift.io/echo   default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/sourav-1/echo   latest   20 minutes ago
+imagestream.image.openshift.io/ubi    default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/sourav-1/ubi    8.0      21 minutes ago
+[student@workstation sshl]$ oc get bc
+NAME   TYPE     FROM               LATEST
+echo   Docker   Git@docker-build   1
+[student@workstation sshl]$ oc describe bc/echo |less
+[student@workstation sshl]$ oc get is
+NAME   IMAGE REPOSITORY                                                                  TAGS     UPDATED
+echo   default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/sourav-1/echo   latest   23 minutes ago
+ubi    default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/sourav-1/ubi    8.0      24 minutes ago
+[student@workstation sshl]$ oc describe is/echo
+Name:			echo
+Namespace:		sourav-1
+Created:		24 minutes ago
+Labels:			app=echo
+			app.kubernetes.io/component=echo
+			app.kubernetes.io/instance=echo
+Annotations:		openshift.io/generated-by=OpenShiftNewApp
+Image Repository:	default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/sourav-1/echo
+Image Lookup:		local=false
+Unique Images:		1
+Tags:			1
+
+latest
+  no spec tag
+
+  * image-registry.openshift-image-registry.svc:5000/sourav-1/echo@sha256:7b17092291d17753d96635ad8fccd9975bb6ae359a772e9c1b89f312a274b62b
+      24 minutes ago
+[student@workstation sshl]$ oc get deployment
+NAME   READY   UP-TO-DATE   AVAILABLE   AGE
+echo   1/1     1            1           25m
+[student@workstation sshl]$ oc describe deployment/echo
+Name:                   echo
+Namespace:              sourav-1
+CreationTimestamp:      Wed, 22 Dec 2021 13:16:16 -0500
+Labels:                 app=echo
+                        app.kubernetes.io/component=echo
+                        app.kubernetes.io/instance=echo
+Annotations:            deployment.kubernetes.io/revision: 2
+                        image.openshift.io/triggers:
+                          [{"from":{"kind":"ImageStreamTag","name":"echo:latest"},"fieldPath":"spec.template.spec.containers[?(@.name==\"echo\")].image"}]
+                        openshift.io/generated-by: OpenShiftNewApp
+Selector:               deployment=echo
+Replicas:               1 desired | 1 updated | 1 total | 1 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:       deployment=echo
+  Annotations:  openshift.io/generated-by: OpenShiftNewApp
+  Containers:
+   echo:
+    Image:        image-registry.openshift-image-registry.svc:5000/sourav-1/echo@sha256:7b17092291d17753d96635ad8fccd9975bb6ae359a772e9c1b89f312a274b62b
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+  Type           Status  Reason
+  ----           ------  ------
+  Available      True    MinimumReplicasAvailable
+  Progressing    True    NewReplicaSetAvailable
+OldReplicaSets:  <none>
+NewReplicaSet:   echo-7884649cd (1/1 replicas created)
+Events:
+  Type    Reason             Age   From                   Message
+  ----    ------             ----  ----                   -------
+  Normal  ScalingReplicaSet  26m   deployment-controller  Scaled up replica set echo-5fd8fdb874 to 1
+  Normal  ScalingReplicaSet  26m   deployment-controller  Scaled up replica set echo-7884649cd to 1
+  Normal  ScalingReplicaSet  26m   deployment-controller  Scaled down replica set echo-5fd8fdb874 to 0
+[student@workstation sshl]$ oc get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+echo-1-build           0/1     Completed   0          31m
+echo-7884649cd-vl5bj   1/1     Running     0          31m
+[student@workstation sshl]$ oc logs echo-1-build
+Caching blobs under "/var/cache/blobs".
+
+Pulling image registry.access.redhat.com/ubi8/ubi@sha256:8275e2ad7f458e329bdc8c0e7543cff1729998fe515a281d49638246de8e39ee ...
+Getting image source signatures
+Copying blob sha256:641d7cc5cbc48a13c68806cf25d5bcf76ea2157c3181e1db4f5d0edae34954ac
+Copying blob sha256:c65691897a4d140d441e2024ce086de996b1c4620832b90c973db81329577274
+Copying config sha256:11f9dba4d1bc7bbead64adb8fd73ea92dca5fac88a9b5c2c9796abcf2e97846d
+Writing manifest to image destination
+Storing signatures
+STEP 1: FROM registry.access.redhat.com/ubi8/ubi@sha256:8275e2ad7f458e329bdc8c0e7543cff1729998fe515a281d49638246de8e39ee
+STEP 2: USER 1001
+--> 805dcf66c86
+STEP 3: CMD bash -c "while true; do echo test; sleep 5; done"
+--> 31509220593
+STEP 4: ENV "OPENSHIFT_BUILD_NAME"="echo-1" "OPENSHIFT_BUILD_NAMESPACE"="sourav-1" "OPENSHIFT_BUILD_SOURCE"="https://github.com/gitish/DO288-apps" "OPENSHIFT_BUILD_REFERENCE"="docker-build" "OPENSHIFT_BUILD_COMMIT"="f355431fb67e02bf81041c1ddf395770a774c657"
+--> 52eb406f423
+STEP 5: LABEL "io.openshift.build.commit.author"="Guy Bianco IV \u003cgjbiancoiv@gmail.com\u003e" "io.openshift.build.commit.date"="Tue Nov 16 03:37:38 2021 -0500" "io.openshift.build.commit.id"="f355431fb67e02bf81041c1ddf395770a774c657" "io.openshift.build.commit.message"="Fix(ch08s04): Correct Chef download link in Containerfile (#192)" "io.openshift.build.commit.ref"="docker-build" "io.openshift.build.name"="echo-1" "io.openshift.build.namespace"="sourav-1" "io.openshift.build.source-context-dir"="ubi-echo" "io.openshift.build.source-location"="https://github.com/gitish/DO288-apps"
+STEP 6: COMMIT temp.builder.openshift.io/sourav-1/echo-1:af1672df
+--> a693b14ed05
+a693b14ed0538674bcdc1dac707f7875f33b5bc5a5ab158ee233f6a4147b0967
+
+Pushing image image-registry.openshift-image-registry.svc:5000/sourav-1/echo:latest ...
+Getting image source signatures
+Copying blob sha256:641d7cc5cbc48a13c68806cf25d5bcf76ea2157c3181e1db4f5d0edae34954ac
+Copying blob sha256:c65691897a4d140d441e2024ce086de996b1c4620832b90c973db81329577274
+Copying config sha256:a693b14ed0538674bcdc1dac707f7875f33b5bc5a5ab158ee233f6a4147b0967
+Writing manifest to image destination
+Storing signatures
+Successfully pushed image-registry.openshift-image-registry.svc:5000/sourav-1/echo@sha256:7b17092291d17753d96635ad8fccd9975bb6ae359a772e9c1b89f312a274b62b
+Push successful
+[student@workstation sshl]$ oc get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+echo-1-build           0/1     Completed   0          33m
+echo-7884649cd-vl5bj   1/1     Running     0          33m
+[student@workstation sshl]$ kubectl get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+echo-1-build           0/1     Completed   0          33m
+echo-7884649cd-vl5bj   1/1     Running     0          33m
+[student@workstation sshl]$ kubectl get bc
+NAME   TYPE     FROM               LATEST
+echo   Docker   Git@docker-build   1
+[student@workstation sshl]$ oc logs echo-7884649cd-vl5bj 
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+test
+[student@workstation sshl]$ ls
+DO288-apps
+[student@workstation sshl]$ cd DO288-apps/ubi-echo/
+[student@workstation ubi-echo]$ ls
+Dockerfile
+[student@workstation ubi-echo]$ cat Dockerfile 
+FROM registry.access.redhat.com/ubi8/ubi:8.0
+USER 1001
+CMD bash -c "while true; do echo test; sleep 5; done"
+[student@workstation ubi-echo]$ oc get is
+NAME   IMAGE REPOSITORY                                                                  TAGS     UPDATED
+echo   default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/sourav-1/echo   latest   35 minutes ago
+ubi    default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/sourav-1/ubi    8.0      36 minutes ago
+[student@workstation ubi-echo]$ ls
+Dockerfile
+[student@workstation ubi-echo]$ vi Dockerfile 
+[student@workstation ubi-echo]$ git status
+On branch docker-build
+Your branch is up to date with 'origin/docker-build'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Dockerfile
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[student@workstation ubi-echo]$ git commit -m "adding counter"
+On branch docker-build
+Your branch is up to date with 'origin/docker-build'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Dockerfile
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[student@workstation ubi-echo]$ git add .
+[student@workstation ubi-echo]$ git status
+On branch docker-build
+Your branch is up to date with 'origin/docker-build'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   Dockerfile
+
+[student@workstation ubi-echo]$ git commit -m "adding counter"
+[docker-build 729a4b4] adding counter
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[student@workstation ubi-echo]$ git branch
+* docker-build
+  main
+[student@workstation ubi-echo]$ git push origin docker-build
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (4/4), 438 bytes | 438.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/gitish/DO288-apps.git
+   f355431..729a4b4  docker-build -> docker-build
+[student@workstation ubi-echo]$ oc get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+echo-1-build           0/1     Completed   0          40m
+echo-7884649cd-vl5bj   1/1     Running     0          39m
+[student@workstation ubi-echo]$ oc new-app --name echo https://github.com/gitish/DO288-apps#docker-build --context-dir ubi-echo
+--> Found container image 11f9dba (2 years old) from registry.access.redhat.com for "registry.access.redhat.com/ubi8/ubi:8.0"
+
+    Red Hat Universal Base Image 8 
+    ------------------------------ 
+    The Universal Base Image is designed and engineered to be the base layer for all of your containerized applications, middleware and utilities. This base image is freely redistributable, but Red Hat only supports Red Hat technologies through subscriptions for Red Hat products. This image is maintained by Red Hat and updated regularly.
+
+    Tags: base rhel8
+
+    * An image stream tag will be created as "ubi:8.0" that will track the source image
+    * A Docker build using source code from https://github.com/gitish/DO288-apps#docker-build will be created
+      * The resulting image will be pushed to image stream tag "echo:latest"
+      * Every time "ubi:8.0" changes a new build will be triggered
+
+--> Creating resources ...
+    error: buildconfigs.build.openshift.io "echo" already exists
+    error: deployments.apps "echo" already exists
+--> Failed
+[student@workstation ubi-echo]$ send
+bash: send: command not found...
+[student@workstation ubi-echo]$ ls
+Dockerfile
+[student@workstation ubi-echo]$ mkdir myWork
+[student@workstation ubi-echo]$ oc start-build echo 
+build.build.openshift.io/echo-2 started
+[student@workstation ubi-echo]$ oc get pods
+NAME                   READY   STATUS      RESTARTS   AGE
+echo-1-build           0/1     Completed   0          45m
+echo-2-build           1/1     Running     0          11s
+echo-7884649cd-vl5bj   1/1     Running     0          45m
+[student@workstation ubi-echo]$ oc logs bc/echo
+Cloning "https://github.com/gitish/DO288-apps" ...
+	Commit:	729a4b417a13be8b23c299828a40ab7203c31c09 (adding counter)
+	Author:	Student User <student@workstation.lab.example.com>
+	Date:	Wed Dec 22 13:55:49 2021 -0500
+Replaced Dockerfile FROM image registry.access.redhat.com/ubi8/ubi:8.0
+Caching blobs under "/var/cache/blobs".
+
+Pulling image registry.access.redhat.com/ubi8/ubi@sha256:8275e2ad7f458e329bdc8c0e7543cff1729998fe515a281d49638246de8e39ee ...
+Getting image source signatures
+Copying blob sha256:641d7cc5cbc48a13c68806cf25d5bcf76ea2157c3181e1db4f5d0edae34954ac
+Copying blob sha256:c65691897a4d140d441e2024ce086de996b1c4620832b90c973db81329577274
+Copying config sha256:11f9dba4d1bc7bbead64adb8fd73ea92dca5fac88a9b5c2c9796abcf2e97846d
+Writing manifest to image destination
+Storing signatures
+STEP 1: FROM registry.access.redhat.com/ubi8/ubi@sha256:8275e2ad7f458e329bdc8c0e7543cff1729998fe515a281d49638246de8e39ee
+STEP 2: USER 1001
+--> 7404c4e1dd5
+STEP 3: CMD bash -c "while true; do (( i++ )); echo test \$i; sleep 5; done"
+--> 0f5b900e72d
+STEP 4: ENV "OPENSHIFT_BUILD_NAME"="echo-2" "OPENSHIFT_BUILD_NAMESPACE"="sourav-1" "OPENSHIFT_BUILD_SOURCE"="https://github.com/gitish/DO288-apps" "OPENSHIFT_BUILD_REFERENCE"="docker-build" "OPENSHIFT_BUILD_COMMIT"="729a4b417a13be8b23c299828a40ab7203c31c09"
+--> d481b96f117
+STEP 5: LABEL "io.openshift.build.commit.author"="Student User \u003cstudent@workstation.lab.example.com\u003e" "io.openshift.build.commit.date"="Wed Dec 22 13:55:49 2021 -0500" "io.openshift.build.commit.id"="729a4b417a13be8b23c299828a40ab7203c31c09" "io.openshift.build.commit.message"="adding counter" "io.openshift.build.commit.ref"="docker-build" "io.openshift.build.name"="echo-2" "io.openshift.build.namespace"="sourav-1" "io.openshift.build.source-context-dir"="ubi-echo" "io.openshift.build.source-location"="https://github.com/gitish/DO288-apps"
+STEP 6: COMMIT temp.builder.openshift.io/sourav-1/echo-2:e3fab8e3
+--> 06a75248387
+06a75248387f95b4c437234bf9b817556d0a79750d9a081a83735891421f0c94
+
+Pushing image image-registry.openshift-image-registry.svc:5000/sourav-1/echo:latest ...
+Getting image source signatures
+Copying blob sha256:641d7cc5cbc48a13c68806cf25d5bcf76ea2157c3181e1db4f5d0edae34954ac
+Copying blob sha256:c65691897a4d140d441e2024ce086de996b1c4620832b90c973db81329577274
+Copying config sha256:06a75248387f95b4c437234bf9b817556d0a79750d9a081a83735891421f0c94
+Writing manifest to image destination
+Storing signatures
+Successfully pushed image-registry.openshift-image-registry.svc:5000/sourav-1/echo@sha256:6cccaf7be713d5d378d923a80d3a1e758d7995a723d9a9f8499ac8b834acb5e5
+Push successful
+[student@workstation ubi-echo]$ oc get pods
+NAME                    READY   STATUS        RESTARTS   AGE
+echo-1-build            0/1     Completed     0          46m
+echo-2-build            0/1     Completed     0          44s
+echo-69f79fb64f-5tp7x   1/1     Running       0          25s
+echo-7884649cd-vl5bj    1/1     Terminating   0          45m
+[student@workstation ubi-echo]$ oc logs echo-69f79fb64f-5tp7x 
+test 1
+test 2
+test 3
+test 4
+test 5
+test 6
+test 7
+test 8
+[student@workstation ubi-echo]$ oc logs echo-69f79fb64f-5tp7x 
+test 1
+test 2
+test 3
+test 4
+test 5
+test 6
+test 7
+test 8
+test 9
+test 10
+[student@workstation ubi-echo]$ oc logs -f echo-69f79fb64f-5tp7x 
+test 1
+test 2
+test 3
+test 4
+test 5
+test 6
+test 7
+test 8
+test 9
+test 10
+test 11
+test 12
+test 13
+^C
+[student@workstation ubi-echo]$ ls
+
