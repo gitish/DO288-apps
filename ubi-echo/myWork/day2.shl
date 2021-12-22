@@ -1,0 +1,83 @@
+[student@workstation ~]$ ls
+Desktop     Downloads            pat         s2i-sample-app  temp.properties
+DO288       Music                Pictures    sh-pat          tmp
+DO288-apps  oc_commands.txt      Public      sshl            Videos
+Documents   oc_commands.txt.bkp  s2i-go-app  Templates
+[student@workstation ~]$ cd sshl
+[student@workstation sshl]$ ls
+DO288-apps
+[student@workstation sshl]$ cd DO288-apps/
+[student@workstation DO288-apps]$ ls
+app-config         LICENSE               probes           todo-frontend
+books              micro-java            quip             todo-single
+build-app          movies                quotes           todo-ssr
+container-build    nexus3                README.md        trigger-builds
+go-hello           nodejs-helloworld     s2i-scripts      ubi-echo
+hello-java         php-hello-dockerfile  simple-pipeline  ubi-info
+hello-world-nginx  php-helloworld        todo-api         ubi-sleep
+html-helloworld    php-scale             todo-api-micro
+java-serverhost    post-commit           todo-backend
+[student@workstation DO288-apps]$ cd ubi-echo/
+[student@workstation ubi-echo]$ ls
+Dockerfile  myWork
+[student@workstation ubi-echo]$ git status
+On branch docker-build
+Your branch is ahead of 'origin/docker-build' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+[student@workstation ubi-echo]$ git push origin docker-build
+Gtk-Message: 14:22:37.780: Failed to load module "canberra-gtk-module"
+Gtk-Message: 14:22:42.222: Failed to load module "canberra-gtk-module"
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/gitish/DO288-apps.git/'
+[student@workstation ubi-echo]$ git push origin docker-build
+Gtk-Message: 14:23:23.147: Failed to load module "canberra-gtk-module"
+Gtk-Message: 14:23:26.753: Failed to load module "canberra-gtk-module"
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/gitish/DO288-apps.git/'
+[student@workstation ubi-echo]$ git status
+On branch docker-build
+Your branch is ahead of 'origin/docker-build' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+[student@workstation ubi-echo]$ git push origin docker-build
+Gtk-Message: 14:24:47.303: Failed to load module "canberra-gtk-module"
+Gtk-Message: 14:25:02.090: Failed to load module "canberra-gtk-module"
+remote: Invalid username or password.
+fatal: Authentication failed for 'https://github.com/gitish/DO288-apps.git/'
+[student@workstation ubi-echo]$ cd ..
+[student@workstation DO288-apps]$ lab deploy-image start
+
+Checking prerequisites for GE: Managing an Application with the Web Console
+
+ Verifying the OpenShift cluster is running:
+ · Log in on OpenShift.........................................  SUCCESS
+ · Check master node eu46-qj5nx-master-0 is ready..............  SUCCESS
+ · Check master node eu46-qj5nx-master-1 is ready..............  SUCCESS
+ · Check master node eu46-qj5nx-master-2 is ready..............  SUCCESS
+ · Check the internal registry is up and running...............  SUCCESS
+ Checking required artifacts:
+ · Image 'redhattraining/php-hello-dockerfile' is available....  SUCCESS
+
+Overall start status...........................................  SUCCESS
+
+[student@workstation DO288-apps]$ grep -i wildcard /usr/local/etc/ocp4.config 
+RHT_OCP4_WILDCARD_DOMAIN=apps.eu46.prod.nextcle.com
+[student@workstation DO288-apps]$ host foo.SWC
+Host foo.SWC not found: 3(NXDOMAIN)
+[student@workstation DO288-apps]$ host foo.$WC
+[student@workstation DO288-apps]$ host foo.$RHT_OCP4_WILDCARD_DOMAIN
+foo.apps.eu46.prod.nextcle.com has address 161.156.176.179
+[student@workstation DO288-apps]$ host bar.$RHT_OCP4_WILDCARD_DOMAIN
+bar.apps.eu46.prod.nextcle.com has address 161.156.176.179
+[student@workstation DO288-apps]$ host $RANDOM.$RHT_OCP4_WILDCARD_DOMAIN
+11463.apps.eu46.prod.nextcle.com has address 161.156.176.179
+[student@workstation DO288-apps]$ oc whoami --show-console
+https://console-openshift-console.apps.eu46.prod.nextcle.com
+[student@workstation DO288-apps]$ oc get route -n openshift-console
+NAME        HOST/PORT                                                PATH   SERVICES    PORT    TERMINATION          WILDCARD
+console     console-openshift-console.apps.eu46.prod.nextcle.com            console     https   reencrypt/Redirect   None
+downloads   downloads-openshift-console.apps.eu46.prod.nextcle.com          downloads   http    edge/Redirect        None
+[student@workstation DO288-apps]$ ls
