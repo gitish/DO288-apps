@@ -1,0 +1,306 @@
+[student@workstation ~]$ oc whoami
+oldwey
+[student@workstation ~]$ ls
+Desktop     Downloads            pat         s2i-sample-app  temp.properties
+DO288       Music                Pictures    sh-pat          tmp
+DO288-apps  oc_commands.txt      Public      sshl            Videos
+Documents   oc_commands.txt.bkp  s2i-go-app  Templates
+[student@workstation ~]$ cd sshl;
+[student@workstation sshl]$ ls
+DO288-apps
+[student@workstation sshl]$ cd DO288-apps/
+[student@workstation DO288-apps]$ ls
+app-config         LICENSE               probes           todo-frontend
+books              micro-java            quip             todo-single
+build-app          movies                quotes           todo-ssr
+container-build    nexus3                README.md        trigger-builds
+go-hello           nodejs-helloworld     s2i-scripts      ubi-echo
+hello-java         php-hello-dockerfile  simple-pipeline  ubi-info
+hello-world-nginx  php-helloworld        todo-api         ubi-sleep
+html-helloworld    php-scale             todo-api-micro
+java-serverhost    post-commit           todo-backend
+[student@workstation DO288-apps]$ cd ubi-echo/
+[student@workstation ubi-echo]$ ls
+Dockerfile  myWork
+[student@workstation ubi-echo]$ cd myWork/
+[student@workstation myWork]$ ls
+day1-1.shl  day1.shl  day2.shl  test
+[student@workstation myWork]$ oc status
+error: you do not have rights to view project "sourav-1" specified in your config or the project doesn't exist
+[student@workstation myWork]$ oc get porject
+error: the server doesn't have a resource type "porject"
+[student@workstation myWork]$ oc get porjects
+error: the server doesn't have a resource type "porjects"
+[student@workstation myWork]$ oc get projects
+No resources found
+[student@workstation myWork]$ oc new-project php-helloworld
+Now using project "php-helloworld" on server "https://api.eu46.prod.nextcle.com:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
+
+[student@workstation myWork]$ oc get projects
+NAME             DISPLAY NAME   STATUS
+php-helloworld                  Active
+[student@workstation myWork]$ oc status
+In project php-helloworld on server https://api.eu46.prod.nextcle.com:6443
+
+You have no services, deployment configs, or build configs.
+Run 'oc new-app' to create an application.
+[student@workstation myWork]$ oc get is
+No resources found in php-helloworld namespace.
+[student@workstation myWork]$ oc get is -n openshift
+NAME                                            IMAGE REPOSITORY                                                                                                            TAGS                                                     UPDATED
+apicast-gateway                                 default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/apicast-gateway                                 2.1.0.GA,2.2.0.GA,2.3.0.GA,2.4.0.GA + 6 more...          4 days ago
+apicurito-ui                                    default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/apicurito-ui                                    1.2,1.3,1.4,1.5,1.6,1.7                                  4 days ago
+cli                                             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/cli                                             latest                                                   4 days ago
+cli-artifacts                                   default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/cli-artifacts                                   latest                                                   4 days ago
+dotnet                                          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/dotnet                                          2.1,2.1-el7,2.1-ubi8,3.1,3.1-el7 + 2 more...             4 days ago
+dotnet-runtime                                  default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/dotnet-runtime                                  2.1,2.1-el7,2.1-ubi8,3.1,3.1-el7 + 2 more...             4 days ago
+eap-cd-openshift                                default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/eap-cd-openshift                                12,12.0,13,13.0,14,14.0,15,15.0,16,16.0 + 9 more...      4 days ago
+eap-cd-runtime-openshift                        default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/eap-cd-runtime-openshift                        18,18.0,19,19.0,20,20.0,latest                           4 days ago
+fis-java-openshift                              default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/fis-java-openshift                              1.0,2.0                                                  4 days ago
+fis-karaf-openshift                             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/fis-karaf-openshift                             1.0,2.0                                                  4 days ago
+fuse-apicurito-generator                        default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/fuse-apicurito-generator                        1.2,1.3,1.4,1.5,1.6,1.7                                  4 days ago
+fuse7-console                                   default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/fuse7-console                                   1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7                          4 days ago
+fuse7-eap-openshift                             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/fuse7-eap-openshift                             1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7                          4 days ago
+fuse7-java-openshift                            default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/fuse7-java-openshift                            1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7                          4 days ago
+fuse7-karaf-openshift                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/fuse7-karaf-openshift                           1.0,1.1,1.2,1.3,1.4,1.5,1.7                              4 days ago
+golang                                          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/golang                                          1.13.4-ubi7,1.13.4-ubi8,latest                           4 days ago
+httpd                                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/httpd                                           2.4,2.4-el7,2.4-el8,latest                               4 days ago
+installer                                       default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/installer                                       latest                                                   4 days ago
+installer-artifacts                             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/installer-artifacts                             latest                                                   4 days ago
+java                                            default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/java                                            11,8,latest,openjdk-11-el7,openjdk-11-ubi8 + 2 more...   4 days ago
+jboss-amq-62                                    default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-amq-62                                    1.1,1.2,1.3,1.4,1.5,1.6,1.7                              4 days ago
+jboss-amq-63                                    default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-amq-63                                    1.0,1.1,1.2,1.3,1.4                                      4 days ago
+jboss-datagrid65-client-openshift               default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-datagrid65-client-openshift               1.0,1.1                                                  4 days ago
+jboss-datagrid65-openshift                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-datagrid65-openshift                      1.2,1.3,1.4,1.5,1.6                                      4 days ago
+jboss-datagrid71-client-openshift               default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-datagrid71-client-openshift               1.0                                                      4 days ago
+jboss-datagrid71-openshift                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-datagrid71-openshift                      1.0,1.1,1.2,1.3                                          4 days ago
+jboss-datagrid72-openshift                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-datagrid72-openshift                      1.0,1.1,1.2                                              4 days ago
+jboss-datagrid73-openshift                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-datagrid73-openshift                      1.0,1.1,1.2,1.3,1.4                                      4 days ago
+jboss-datavirt64-driver-openshift               default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-datavirt64-driver-openshift               1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7                          4 days ago
+jboss-datavirt64-openshift                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-datavirt64-openshift                      1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7                          4 days ago
+jboss-decisionserver64-openshift                default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-decisionserver64-openshift                1.0,1.1,1.2,1.3,1.4,1.5,1.6                              4 days ago
+jboss-eap64-openshift                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap64-openshift                           1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9 + 1 more...          4 days ago
+jboss-eap70-openshift                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap70-openshift                           1.3,1.4,1.5,1.6,1.7                                      4 days ago
+jboss-eap71-openshift                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap71-openshift                           1.1,1.2,1.3,1.4,latest                                   4 days ago
+jboss-eap72-openjdk11-openshift-rhel8           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap72-openjdk11-openshift-rhel8           1.0,1.1,latest                                           4 days ago
+jboss-eap72-openshift                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap72-openshift                           1.0,1.1,1.2,latest                                       4 days ago
+jboss-eap73-openjdk11-openshift                 default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap73-openjdk11-openshift                 7.3,7.3.0,latest                                         4 days ago
+jboss-eap73-openjdk11-runtime-openshift         default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap73-openjdk11-runtime-openshift         7.3,7.3.0,latest                                         4 days ago
+jboss-eap73-openshift                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap73-openshift                           7.3,7.3.0,latest                                         4 days ago
+jboss-eap73-runtime-openshift                   default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-eap73-runtime-openshift                   7.3,7.3.0,latest                                         4 days ago
+jboss-fuse70-console                            default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-fuse70-console                            1.0                                                      4 days ago
+jboss-fuse70-eap-openshift                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-fuse70-eap-openshift                      1.0                                                      4 days ago
+jboss-fuse70-java-openshift                     default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-fuse70-java-openshift                     1.0                                                      4 days ago
+jboss-fuse70-karaf-openshift                    default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-fuse70-karaf-openshift                    1.0                                                      4 days ago
+jboss-processserver64-openshift                 default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-processserver64-openshift                 1.0,1.1,1.2,1.3,1.4,1.5,1.6                              4 days ago
+jboss-webserver31-tomcat7-openshift             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-webserver31-tomcat7-openshift             1.0,1.1,1.2,1.3,1.4                                      4 days ago
+jboss-webserver31-tomcat8-openshift             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-webserver31-tomcat8-openshift             1.0,1.1,1.2,1.3,1.4                                      4 days ago
+jboss-webserver53-openjdk11-tomcat9-openshift   default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-webserver53-openjdk11-tomcat9-openshift   1.0,latest                                               4 days ago
+jboss-webserver53-openjdk8-tomcat9-openshift    default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jboss-webserver53-openjdk8-tomcat9-openshift    1.0,latest                                               4 days ago
+jenkins                                         default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jenkins                                         2,latest                                                 3 days ago
+jenkins-agent-base                              default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jenkins-agent-base                              latest                                                   4 days ago
+jenkins-agent-maven                             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jenkins-agent-maven                             latest,v4.0                                              4 days ago
+jenkins-agent-nodejs                            default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/jenkins-agent-nodejs                            latest,v4.0                                              4 days ago
+mariadb                                         default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/mariadb                                         10.3,10.3-el7,10.3-el8,latest                            4 days ago
+mongodb                                         default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/mongodb                                         3.6,latest                                               4 days ago
+must-gather                                     default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/must-gather                                     latest                                                   4 days ago
+mysql                                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/mysql                                           8.0,8.0-el7,8.0-el8,latest                               4 days ago
+nginx                                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/nginx                                           1.14-el8,1.16,1.16-el7,1.16-el8,latest                   4 days ago
+nodejs                                          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/nodejs                                          10,10-ubi7,10-ubi8,12,12-ubi7,12-ubi8 + 1 more...        4 days ago
+oauth-proxy                                     default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/oauth-proxy                                     v4.4                                                     4 days ago
+openjdk-11-rhel7                                default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/openjdk-11-rhel7                                1.0,1.1                                                  4 days ago
+openjdk-11-rhel8                                default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/openjdk-11-rhel8                                1.0                                                      4 days ago
+perl                                            default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/perl                                            5.26,5.26-el7,5.26-ubi8,5.30,5.30-el7 + 1 more...        4 days ago
+php                                             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/php                                             7.2-ubi8,7.3,7.3-ubi7,7.3-ubi8,latest                    4 days ago
+postgresql                                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/postgresql                                      10,10-el7,10-el8,12,12-el7,12-el8 + 2 more...            4 days ago
+python                                          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/python                                          2.7,2.7-ubi7,2.7-ubi8,3.6-ubi8,3.8 + 3 more...           4 days ago
+redhat-openjdk18-openshift                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/redhat-openjdk18-openshift                      1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8                      4 days ago
+redhat-sso70-openshift                          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/redhat-sso70-openshift                          1.3,1.4                                                  4 days ago
+redhat-sso71-openshift                          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/redhat-sso71-openshift                          1.0,1.1,1.2,1.3                                          4 days ago
+redhat-sso72-openshift                          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/redhat-sso72-openshift                          1.0,1.1,1.2,1.3,1.4                                      4 days ago
+redhat-sso73-openshift                          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/redhat-sso73-openshift                          1.0,latest                                               4 days ago
+redis                                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/redis                                           5,5-el7,5-el8,latest                                     4 days ago
+rhdm-decisioncentral-rhel8                      default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/rhdm-decisioncentral-rhel8                      7.8.0                                                    4 days ago
+rhdm-kieserver-rhel8                            default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/rhdm-kieserver-rhel8                            7.8.0                                                    4 days ago
+rhpam-businesscentral-monitoring-rhel8          default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/rhpam-businesscentral-monitoring-rhel8          7.8.0                                                    4 days ago
+rhpam-businesscentral-rhel8                     default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/rhpam-businesscentral-rhel8                     7.8.0                                                    4 days ago
+rhpam-kieserver-rhel8                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/rhpam-kieserver-rhel8                           7.8.0                                                    4 days ago
+rhpam-smartrouter-rhel8                         default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/rhpam-smartrouter-rhel8                         7.8.0                                                    4 days ago
+ruby                                            default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/ruby                                            2.5,2.5-ubi7,2.5-ubi8,2.6,2.6-ubi7 + 4 more...           4 days ago
+sso74-openshift-rhel8                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/sso74-openshift-rhel8                           7.4,latest                                               4 days ago
+tests                                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/tests                                           latest                                                   4 days ago
+tools                                           default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/tools                                           latest                                                   4 days ago
+ubi8-openjdk-11                                 default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/ubi8-openjdk-11                                 1.3                                                      4 days ago
+ubi8-openjdk-8                                  default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/ubi8-openjdk-8                                  1.3                                                      4 days ago
+[student@workstation myWork]$ oc get is -n openshift | grep php
+php                                             default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/php                                             7.2-ubi8,7.3,7.3-ubi7,7.3-ubi8,latest                    4 days ago
+[student@workstation myWork]$ oc describe is/php -n openshift
+Name:			php
+Namespace:		openshift
+Created:		4 days ago
+Labels:			samples.operator.openshift.io/managed=true
+Annotations:		openshift.io/display-name=PHP
+			openshift.io/image.dockerRepositoryCheck=2021-12-18T04:44:40Z
+			samples.operator.openshift.io/version=4.6.52
+Image Repository:	default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/openshift/php
+Image Lookup:		local=false
+Unique Images:		3
+Tags:			5
+
+7.3
+  tagged from registry.redhat.io/rhscl/php-73-rhel7:latest
+    prefer registry pullthrough when referencing this tag
+
+  Build and run PHP 7.3 applications on RHEL 7. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-php-container/blob/master/7.3/README.md.
+  Tags: builder, php, hidden
+  Supports: php:7.3, php
+  Example Repo: https://github.com/sclorg/cakephp-ex.git
+
+  * registry.redhat.io/rhscl/php-73-rhel7@sha256:c1e586e204d2f927be4a7402a0e5e62a61699a8ab43a27cbd0ef2827540f51a8
+      4 days ago
+
+7.3-ubi8 (latest)
+  tagged from registry.redhat.io/ubi8/php-73:latest
+    prefer registry pullthrough when referencing this tag
+
+  Build and run PHP 7.3 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-php-container/blob/master/7.3/README.md.
+  Tags: builder, php
+  Supports: php:7.3, php
+  Example Repo: https://github.com/sclorg/cakephp-ex.git
+
+  * registry.redhat.io/ubi8/php-73@sha256:0365b13ccf86a3c448255baf645439730f3883c8dbc55d4f93b66d3c9f02c98a
+      4 days ago
+
+7.3-ubi7
+  tagged from registry.redhat.io/ubi7/php-73:latest
+    prefer registry pullthrough when referencing this tag
+
+  Build and run PHP 7.3 applications on UBI 7. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-php-container/blob/master/7.3/README.md.
+  Tags: builder, php
+  Supports: php:7.3, php
+  Example Repo: https://github.com/sclorg/cakephp-ex.git
+
+  * registry.redhat.io/ubi7/php-73@sha256:c1e586e204d2f927be4a7402a0e5e62a61699a8ab43a27cbd0ef2827540f51a8
+      4 days ago
+
+7.2-ubi8
+  tagged from registry.redhat.io/ubi8/php-72:latest
+    prefer registry pullthrough when referencing this tag
+
+  Build and run PHP 7.2 applications on UBI 8. For more information about using this builder image, including OpenShift considerations, see https://github.com/sclorg/s2i-php-container/blob/master/7.2/README.md.
+  Tags: builder, php
+  Supports: php:7.2, php
+  Example Repo: https://github.com/sclorg/cakephp-ex.git
+
+  * registry.redhat.io/ubi8/php-72@sha256:daac7c37c508ca93c3d47a78d408025df0b997401251110f86123a73472bd8d0
+      4 days ago
+[student@workstation myWork]$ oc new-app --name hello -i php:7.3-ubi7 --as-deployment-config https://gitlab.com/rgdacosta/ocp-apps.git#rhls --context-dir php-helloworld
+error: unable to checkout ref "rhls" in "https://gitlab.com/rgdacosta/ocp-apps.git" repository: fatal: couldn't find remote ref rhls
+[student@workstation myWork]$ oc new-app --name hello -i php:7.3-ubi7 --as-deployment-config https://gitlab.com/gitish/ocp-apps.git#rhls --context-dir php-helloworld
+Username for 'https://gitlab.com': Username for 'https://gitlab.com': gitish
+error: unable to load template file "https://gitlab.com/gitish/ocp-apps.git#rhls": unable to read URL "https://gitlab.com/gitish/ocp-apps.git#rhls", server reported 503 Service Unavailable, status code=503
+error: git ls-remote failed with: execution of git ls-remote https://gitlab.com/gitish/ocp-apps.git timed out after 30s;  local file access failed with: stat https://gitlab.com/gitish/ocp-apps.git#rhls: no such file or directory
+error: unable to locate any images in image streams, templates loaded in accessible projects, template files, local docker images with name "https://gitlab.com/gitish/ocp-apps.git#rhls"
+
+Argument 'https://gitlab.com/gitish/ocp-apps.git#rhls' was classified as an image, image~source, or loaded template reference.
+
+The 'oc new-app' command will match arguments to the following types:
+
+  1. Images tagged into image streams in the current project or the 'openshift' project
+     - if you don't specify a tag, we'll add ':latest'
+  2. Images in the Docker Hub, on remote registries, or on the local Docker engine
+  3. Templates in the current project or the 'openshift' project
+  4. Git repository URLs or local paths that point to Git repositories
+
+--allow-missing-images can be used to point to an image that does not exist yet.
+
+See 'oc new-app -h' for examples.
+[student@workstation myWork]$ oc new-app --name hello -i php:7.3-ubi7 --as-deployment-config https://gitlab.com/gitish/ocp-apps.git#rhls --context-dir php-helloworld
+warning: Cannot check if git requires authentication.
+--> Found image e682a5b (2 weeks old) in image stream "openshift/php" under tag "7.3-ubi7" for "php:7.3-ubi7"
+
+    Apache 2.4 with PHP 7.3 
+    ----------------------- 
+    PHP 7.3 available as container is a base platform for building and running various PHP 7.3 applications and frameworks. PHP is an HTML-embedded scripting language. PHP attempts to make it easy for developers to write dynamically generated web pages. PHP also offers built-in database integration for several commercial and non-commercial database management systems, so writing a database-enabled webpage with PHP is fairly simple. The most common use of PHP coding is probably as a replacement for CGI scripts.
+
+    Tags: builder, php, php73, rh-php73
+
+    * The source repository appears to match: php
+    * A source build using source code from https://gitlab.com/gitish/ocp-apps.git#rhls will be created
+      * The resulting image will be pushed to image stream tag "hello:latest"
+      * Use 'oc start-build' to trigger a new build
+      * WARNING: this source repository may require credentials.
+                 Create a secret with your git credentials and use 'oc set build-secret' to assign it to the build config.
+    * This image will be deployed in deployment config "hello"
+    * Ports 8080/tcp, 8443/tcp will be load balanced by service "hello"
+      * Other containers can access this service through the hostname "hello"
+
+--> Creating resources ...
+    imagestream.image.openshift.io "hello" created
+    buildconfig.build.openshift.io "hello" created
+    deploymentconfig.apps.openshift.io "hello" created
+    service "hello" created
+--> Success
+    Build scheduled, use 'oc logs -f buildconfig/hello' to track its progress.
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/hello' 
+    Run 'oc status' to view your app.
+[student@workstation myWork]$ oc logs -f bc/hello
+Cloning "https://gitlab.com/gitish/ocp-apps.git" ...
+error: failed to fetch requested repository "https://gitlab.com/gitish/ocp-apps.git" with provided credentials
+[student@workstation myWork]$ oc new-app --name hello -i php:7.3-ubi7 --as-deployment-config https://gitlab.com/gitish/ocp-apps.git#rhls --context-dir php-helloworld
+warning: Cannot check if git requires authentication.
+--> Found image e682a5b (2 weeks old) in image stream "openshift/php" under tag "7.3-ubi7" for "php:7.3-ubi7"
+
+    Apache 2.4 with PHP 7.3 
+    ----------------------- 
+    PHP 7.3 available as container is a base platform for building and running various PHP 7.3 applications and frameworks. PHP is an HTML-embedded scripting language. PHP attempts to make it easy for developers to write dynamically generated web pages. PHP also offers built-in database integration for several commercial and non-commercial database management systems, so writing a database-enabled webpage with PHP is fairly simple. The most common use of PHP coding is probably as a replacement for CGI scripts.
+
+    Tags: builder, php, php73, rh-php73
+
+    * The source repository appears to match: php
+    * A source build using source code from https://gitlab.com/gitish/ocp-apps.git#rhls will be created
+      * The resulting image will be pushed to image stream tag "hello:latest"
+      * Use 'oc start-build' to trigger a new build
+      * WARNING: this source repository may require credentials.
+                 Create a secret with your git credentials and use 'oc set build-secret' to assign it to the build config.
+    * This image will be deployed in deployment config "hello"
+    * Ports 8080/tcp, 8443/tcp will be load balanced by service "hello"
+      * Other containers can access this service through the hostname "hello"
+
+--> Creating resources ...
+    imagestreamtag.image.openshift.io "hello:latest" created
+    error: buildconfigs.build.openshift.io "hello" already exists
+    error: deploymentconfigs.apps.openshift.io "hello" already exists
+    error: services "hello" already exists
+--> Failed
+[student@workstation myWork]$ oc logs -f bc/hello
+Cloning "https://gitlab.com/gitish/ocp-apps.git" ...
+error: failed to fetch requested repository "https://gitlab.com/gitish/ocp-apps.git" with provided credentials
+[student@workstation myWork]$ oc get all
+NAME                READY   STATUS       RESTARTS   AGE
+pod/hello-1-build   0/1     Init:Error   0          4m20s
+
+NAME            TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)             AGE
+service/hello   ClusterIP   172.30.72.132   <none>        8080/TCP,8443/TCP   4m20s
+
+NAME                                       REVISION   DESIRED   CURRENT   TRIGGERED BY
+deploymentconfig.apps.openshift.io/hello   0          1         0         config,image(hello:latest)
+
+NAME                                   TYPE     FROM       LATEST
+buildconfig.build.openshift.io/hello   Source   Git@rhls   1
+
+NAME                               TYPE     FROM       STATUS                       STARTED         DURATION
+build.build.openshift.io/hello-1   Source   Git@rhls   Failed (FetchSourceFailed)   4 minutes ago   4s
+
+NAME                                   IMAGE REPOSITORY                                                                         TAGS     UPDATED
+imagestream.image.openshift.io/hello   default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/php-helloworld/hello   latest   
+
