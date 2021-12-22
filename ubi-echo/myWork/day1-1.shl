@@ -1,0 +1,31 @@
+[student@workstation ubi-echo]$ oc describe is/echo
+Name:			echo
+Namespace:		sourav-1
+Created:		52 minutes ago
+Labels:			app=echo
+			app.kubernetes.io/component=echo
+			app.kubernetes.io/instance=echo
+Annotations:		openshift.io/generated-by=OpenShiftNewApp
+Image Repository:	default-route-openshift-image-registry.apps.eu46.prod.nextcle.com/sourav-1/echo
+Image Lookup:		local=false
+Unique Images:		2
+Tags:			1
+
+latest
+  no spec tag
+
+  * image-registry.openshift-image-registry.svc:5000/sourav-1/echo@sha256:6cccaf7be713d5d378d923a80d3a1e758d7995a723d9a9f8499ac8b834acb5e5
+      6 minutes ago
+    image-registry.openshift-image-registry.svc:5000/sourav-1/echo@sha256:7b17092291d17753d96635ad8fccd9975bb6ae359a772e9c1b89f312a274b62b
+      51 minutes ago
+[student@workstation ubi-echo]$ oc describe deployment/echo | grep -i labels
+Labels:                 app=echo
+  Labels:       deployment=echo
+[student@workstation ubi-echo]$ oc delete all -l app=echo
+deployment.apps "echo" deleted
+buildconfig.build.openshift.io "echo" deleted
+build.build.openshift.io "echo-1" deleted
+build.build.openshift.io "echo-2" deleted
+imagestream.image.openshift.io "echo" deleted
+imagestream.image.openshift.io "ubi" deleted
+[student@workstation ubi-echo]$
