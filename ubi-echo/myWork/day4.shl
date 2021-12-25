@@ -1,0 +1,103 @@
+[student@workstation ~]$ ls
+Desktop     Downloads            pat         s2i-sample-app  temp.properties
+DO288       Music                Pictures    sh-pat          tmp
+DO288-apps  oc_commands.txt      Public      sshl            Videos
+Documents   oc_commands.txt.bkp  s2i-go-app  Templates
+[student@workstation ~]$ cd sshl
+[student@workstation sshl]$ ls
+DO288-apps
+[student@workstation sshl]$ cd DO288-apps/
+[student@workstation DO288-apps]$ ls
+app-config         html-helloworld    php-hello-dockerfile  README.md        todo-single
+books              java-serverhost    php-helloworld        s2i-scripts      todo-ssr
+build-app          LICENSE            php-scale             simple-pipeline  trigger-builds
+container-build    micro-java         post-commit           todo-api         ubi-echo
+go-hello           movies             probes                todo-api-micro   ubi-info
+hello-java         nexus3             quip                  todo-backend     ubi-sleep
+hello-world-nginx  nodejs-helloworld  quotes                todo-frontend
+[student@workstation DO288-apps]$ cd ubi-echo/
+[student@workstation ubi-echo]$ ls
+Dockerfile  myWork
+[student@workstation ubi-echo]$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	myWork/
+
+nothing added to commit but untracked files present (use "git add" to track)
+[student@workstation ubi-echo]$ oc get pods
+NAME                         READY   STATUS      RESTARTS   AGE
+quotesapi-1-build            0/1     Completed   0          11m
+quotesapi-699b46b597-ld2hj   1/1     Running     0          11m
+quotesdb-6b7ffcc649-2ps7p    1/1     Running     0          11m
+[student@workstation ubi-echo]$ oc describe pods/quotesdb-6b7ffcc649-2ps7p|grep ip
+                    "ips": [
+                    "ips": [
+[student@workstation ubi-echo]$ oc describe pods/quotesdb-6b7ffcc649-2ps7p|grep IP
+IP:           10.128.5.175
+IPs:
+  IP:           10.128.5.175
+[student@workstation ubi-echo]$ oc describe pods/quotesdb-6b7ffcc649-2ps7p|grep -A4 Environment
+    Environment:
+      MYSQL_USER:           <set to the key 'database-user' in secret 'quotesapi'>      Optional: false
+      MYSQL_ROOT_PASSWORD:  <set to the key 'database-password' in secret 'quotesapi'>  Optional: false
+      MYSQL_PASSWORD:       <set to the key 'database-password' in secret 'quotesapi'>  Optional: false
+      MYSQL_DATABASE:       phpapp
+[student@workstation ubi-echo]$ oc describe pods/quotesapi-699b46b597-ld2hj|grep -A4 Environment
+    Environment:
+      DATABASE_SERVICE_NAME:  quotesdb
+      DATABASE_NAME:          phpapp
+      DATABASE_USER:          <set to the key 'database-user' in secret 'quotesapi'>      Optional: false
+      DATABASE_PASSWORD:      <set to the key 'database-password' in secret 'quotesapi'>  Optional: false
+[student@workstation ubi-echo]$ oc rsh quotesapi-699b46b597-ld2hj bash -c 'echo>/dev/tcp/$DATABASE_SERVICE_NAME/3306 && echo OK || echo FAIL'
+OK
+[student@workstation ubi-echo]$ oc logs quotesapi-699b46b597-ld2hj | tail -10
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.129.6.38. Set the 'ServerName' directive globally to suppress this message
+[Sat Dec 25 09:38:33.953102 2021] [ssl:warn] [pid 1] AH01909: 10.129.6.38:8443:0 server certificate does NOT include an ID which matches the server name
+AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.129.6.38. Set the 'ServerName' directive globally to suppress this message
+[Sat Dec 25 09:38:34.027471 2021] [ssl:warn] [pid 1] AH01909: 10.129.6.38:8443:0 server certificate does NOT include an ID which matches the server name
+[Sat Dec 25 09:38:34.027724 2021] [lbmethod_heartbeat:notice] [pid 1] AH02282: No slotmem from mod_heartmonitor
+[Sat Dec 25 09:38:34.027826 2021] [http2:warn] [pid 1] AH10034: The mpm module (prefork.c) is not supported by mod_http2. The mpm determines how things are processed in your server. HTTP/2 has more demands in this regard and the currently selected mpm will just not do. This is an advisory warning. Your server will continue to work, but the HTTP/2 protocol will be inactive.
+[Sat Dec 25 09:38:34.262777 2021] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.37 (Red Hat Enterprise Linux) OpenSSL/1.1.1k configured -- resuming normal operations
+[Sat Dec 25 09:38:34.262804 2021] [core:notice] [pid 1] AH00094: Command line: 'httpd -D FOREGROUND'
+[Sat Dec 25 09:42:50.021754 2021] [php7:notice] [pid 30] [client 10.130.4.1:38310] SQL error: Table 'phpapp.quote' doesn't exist\n
+10.130.4.1 - - [25/Dec/2021:09:42:50 +0000] "GET /get.php HTTP/1.1" 500 - "-" "curl/7.61.1"
+[student@workstation ubi-echo]$ oc cp ~/DO288/labs/build-template/quote.sql quotesdb-6b7ffcc649-2ps7p:/tmp/quote.sql
+[student@workstation ubi-echo]$ oc rsh -t quotesdb-6b7ffcc649-2ps7p
+$ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < /tmp/quote.sql
+/bin/sh: 1: cannot open /mp/quote.sql: No such file
+$ mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE < /tmp/quote.sql
+mysql: [Warning] Using a password on the command line interface can be insecure.
+$ exit
+[student@workstation ubi-echo]$ git status
+On branch main
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	myWork/
+
+nothing added to commit but untracked files present (use "git add" to track)
+[student@workstation ubi-echo]$ oc delete project shl-build-template && oc delete project shl-common
+project.project.openshift.io "shl-build-template" deleted
+project.project.openshift.io "shl-common" deleted
+[student@workstation ubi-echo]$ ls
+Dockerfile  myWork
+[student@workstation ubi-echo]$ git add .
+[student@workstation ubi-echo]$ git commit -m "template added in mywork"
+[main abfd9eb] template added in mywork
+ 3 files changed, 451 insertions(+)
+ create mode 100755 ubi-echo/myWork/create-app.sh
+ create mode 100644 ubi-echo/myWork/php-mysql-ephemeral.json
+ create mode 100644 ubi-echo/myWork/quote.sql
+[student@workstation ubi-echo]$ git push origin main
+Gtk-Message: 05:09:06.970: Failed to load module "canberra-gtk-module"
+Gtk-Message: 05:09:12.845: Failed to load module "canberra-gtk-module"
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (7/7), done.
+Writing objects: 100% (7/7), 3.39 KiB | 3.39 MiB/s, done.
+Total 7 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To https://github.com/gitish/DO288-apps.git
+   f355431..abfd9eb  main -> main
+[student@workstation ubi-echo]$
