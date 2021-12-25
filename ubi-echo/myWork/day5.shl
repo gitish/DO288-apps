@@ -1,0 +1,426 @@
+[student@workstation ~]$ lab app-config start
+
+Checking prerequisites for Guided Exercise: Injecting Configuration Data into an Application
+
+ Checking local clone of the applications repository:
+ · Folder '/home/student/DO288-apps' is a git repo.............  SUCCESS
+ · Git repo '/home/student/DO288-apps' has no pending changes..  SUCCESS
+ Verifying the OpenShift cluster is running:
+ · Log in on OpenShift.........................................  SUCCESS
+ · Check master node eu46-qj5nx-master-0 is ready..............  SUCCESS
+ · Check master node eu46-qj5nx-master-1 is ready..............  SUCCESS
+ · Check master node eu46-qj5nx-master-2 is ready..............  SUCCESS
+ · Check the internal registry is up and running...............  SUCCESS
+ Checking required artifacts:
+ · Project 'app-config' exists in student's GitHub fork........  SUCCESS
+ · Module 'nodejs' exists in classroom's Nexus.................  SUCCESS
+ Checking for conflicts with existing OpenShift projects:
+ · Project 'oldwey-app-config' is absent.......................  SUCCESS
+
+Setting up the classroom for Guided Exercise: Injecting Configuration Data into an Application
+
+ · Download exercise files.....................................  SUCCESS
+ · Download solution files.....................................  SUCCESS
+
+Overall start status...........................................  SUCCESS
+
+[student@workstation ~]$ lab --help
+Error: unknown problem specified and not found, --help
+[student@workstation ~]$ where is lab
+bash: where: command not found...
+[student@workstation ~]$ whereis lab
+lab: /usr/local/bin/lab
+[student@workstation ~]$ ls -altr /usr/local/bin/lab
+-rwxr-xr-x. 1 root root 5145 Dec 10 13:09 /usr/local/bin/lab
+[student@workstation ~]$ cd sshl/
+[student@workstation sshl]$ ls
+DO288-apps
+[student@workstation sshl]$ cd DO288-apps/
+[student@workstation DO288-apps]$ ls
+app-config         html-helloworld    php-hello-dockerfile  README.md        todo-single
+books              java-serverhost    php-helloworld        s2i-scripts      todo-ssr
+build-app          LICENSE            php-scale             simple-pipeline  trigger-builds
+container-build    micro-java         post-commit           todo-api         ubi-echo
+go-hello           movies             probes                todo-api-micro   ubi-info
+hello-java         nexus3             quip                  todo-backend     ubi-sleep
+hello-world-nginx  nodejs-helloworld  quotes                todo-frontend
+[student@workstation DO288-apps]$ git checkout main
+Switched to branch 'main'
+[student@workstation DO288-apps]$ git pull origin main
+warning: Pulling without specifying how to reconcile divergent branches is
+discouraged. You can squelch this message by running one of the following
+commands sometime before your next pull:
+
+  git config pull.rebase false  # merge (the default strategy)
+  git config pull.rebase true   # rebase
+  git config pull.ff only       # fast-forward only
+
+You can replace "git config" with "git config --global" to set a default
+preference for all repositories. You can also pass --rebase, --no-rebase,
+or --ff-only on the command line to override the configured default per
+invocation.
+
+From https://github.com/gitish/DO288-apps
+ * branch            main       -> FETCH_HEAD
+Already up to date.
+[student@workstation DO288-apps]$ git checkout -b app-config
+Switched to a new branch 'app-config'
+[student@workstation DO288-apps]$ ls
+app-config         html-helloworld    php-hello-dockerfile  README.md        todo-single
+books              java-serverhost    php-helloworld        s2i-scripts      todo-ssr
+build-app          LICENSE            php-scale             simple-pipeline  trigger-builds
+container-build    micro-java         post-commit           todo-api         ubi-echo
+go-hello           movies             probes                todo-api-micro   ubi-info
+hello-java         nexus3             quip                  todo-backend     ubi-sleep
+hello-world-nginx  nodejs-helloworld  quotes                todo-frontend
+[student@workstation DO288-apps]$ cd app-config/
+[student@workstation app-config]$ ls
+app.js  myapp.sec  package.json
+[student@workstation app-config]$ cat app.js
+var express = require('express');
+var fs = require('fs')
+app = express();
+
+// read in the APP_MSG env var
+var msg = process.env.APP_MSG;
+
+var response;
+
+app.get('/', function (req, res) {
+
+    response = 'Value in the APP_MSG env var is => ' + msg + '\n';
+
+    // Read in the secret file
+    fs.readFile('/opt/app-root/secure/myapp.sec', 'utf8', function (secerr,secdata) {
+        if (secerr) {
+            console.log(secerr + '\n');
+            response += secerr + '\n';
+        }
+        else {
+            response += 'The secret is => ' + secdata + '\n';
+        }
+
+        //send the response to the client
+        res.send(response);
+    });
+
+});
+
+app.listen(8080, function () {
+  console.log('Server listening on port 8080...');
+});
+[student@workstation app-config]$ oc new-project shl-app-config
+Now using project "shl-app-config" on server "https://api.eu46.prod.nextcle.com:6443".
+
+You can add applications to this project with the 'new-app' command. For example, try:
+
+    oc new-app rails-postgresql-example
+
+to build a new example application in Ruby. Or use kubectl to deploy a simple Kubernetes application:
+
+    kubectl create deployment hello-node --image=k8s.gcr.io/serve_hostname
+
+[student@workstation app-config]$ git branch
+* app-config
+  container-build
+  docker-build
+  main
+  source-build
+[student@workstation app-config]$ git push origin app-config
+Gtk-Message: 08:33:21.505: Failed to load module "canberra-gtk-module"
+Gtk-Message: 08:33:25.648: Failed to load module "canberra-gtk-module"
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/gitish/DO288-apps.git
+   20d7733..abfd9eb  app-config -> app-config
+[student@workstation app-config]$ oc new-app --name myapp --build-env npm_config_registry=http://$NEXUS/repository/nodejs nodejs:12~https://github.com/$GT_USER/DO288-apps#app-config --context-dir app-config
+--> Found image 1ad9bd1 (3 weeks old) in image stream "openshift/nodejs" under tag "12" for "nodejs:12"
+
+    Node.js 12 
+    ---------- 
+    Node.js 12 available as container is a base platform for building and running various Node.js 12 applications and frameworks. Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.
+
+    Tags: builder, nodejs, nodejs12
+
+    * A source build using source code from https://github.com/sgulati89/DO288-apps#app-config will be created
+      * The resulting image will be pushed to image stream tag "myapp:latest"
+      * Use 'oc start-build' to trigger a new build
+
+--> Creating resources ...
+    imagestream.image.openshift.io "myapp" created
+    buildconfig.build.openshift.io "myapp" created
+    deployment.apps "myapp" created
+    service "myapp" created
+--> Success
+    Build scheduled, use 'oc logs -f buildconfig/myapp' to track its progress.
+    Application is not exposed. You can expose services to the outside world by executing one or more of the commands below:
+     'oc expose service/myapp' 
+    Run 'oc status' to view your app.
+[student@workstation app-config]$ oc get pods
+NAME                    READY   STATUS      RESTARTS   AGE
+myapp-1-build           0/1     Completed   0          93s
+myapp-b9b89589f-gw2rz   1/1     Running     0          58s
+[student@workstation app-config]$ oc logs -f bc/myapp
+Cloning "https://github.com/sgulati89/DO288-apps" ...
+	Commit:	f355431fb67e02bf81041c1ddf395770a774c657 (Fix(ch08s04): Correct Chef download link in Containerfile (#192))
+	Author:	Guy Bianco IV <gjbiancoiv@gmail.com>
+	Date:	Tue Nov 16 03:37:38 2021 -0500
+Caching blobs under "/var/cache/blobs".
+Getting image source signatures
+Copying blob sha256:aa05f1490571b1a76608228bc66534dffe56c139de13f4ba89d9dfba0de8eb3f
+Copying blob sha256:ac08ca107ad9ed699cbd28339749dd6463a84c73aa1d468a4241385fc4ec3876
+Copying blob sha256:b46ca46c303b49d886a7585735ebd1dc8651e83d0fab5823300cf3a9fd2febc1
+Copying blob sha256:faf2fea3663b6b26a48698856e64b859d6d8cb46bf7d4700e58b7aa941f6fd5f
+Copying blob sha256:8e111a1c7b205e8d46bf83e9725922a10ac4b59f7ce26679318682def91efa55
+Copying config sha256:1ad9bd1d0c04a3b3b229aec8e2cdc45d20ea121155531d44a3c5c49f70e35619
+Writing manifest to image destination
+Storing signatures
+Generating dockerfile with builder image image-registry.openshift-image-registry.svc:5000/openshift/nodejs@sha256:6e20b81d4261bd1050048d157a50b4af531ff19aaccdf1e1abfa24ebfa051fa0
+STEP 1: FROM image-registry.openshift-image-registry.svc:5000/openshift/nodejs@sha256:6e20b81d4261bd1050048d157a50b4af531ff19aaccdf1e1abfa24ebfa051fa0
+STEP 2: LABEL "io.openshift.build.commit.ref"="app-config"       "io.openshift.build.commit.message"="Fix(ch08s04): Correct Chef download link in Containerfile (#192)"       "io.openshift.build.source-location"="https://github.com/sgulati89/DO288-apps"       "io.openshift.build.source-context-dir"="app-config"       "io.openshift.build.image"="image-registry.openshift-image-registry.svc:5000/openshift/nodejs@sha256:6e20b81d4261bd1050048d157a50b4af531ff19aaccdf1e1abfa24ebfa051fa0"       "io.openshift.build.commit.author"="Guy Bianco IV <gjbiancoiv@gmail.com>"       "io.openshift.build.commit.date"="Tue Nov 16 03:37:38 2021 -0500"       "io.openshift.build.commit.id"="f355431fb67e02bf81041c1ddf395770a774c657"
+STEP 3: ENV OPENSHIFT_BUILD_NAME="myapp-1"     OPENSHIFT_BUILD_NAMESPACE="shl-app-config"     OPENSHIFT_BUILD_SOURCE="https://github.com/sgulati89/DO288-apps"     OPENSHIFT_BUILD_REFERENCE="app-config"     OPENSHIFT_BUILD_COMMIT="f355431fb67e02bf81041c1ddf395770a774c657"     npm_config_registry="http://nexus-common.apps.eu46.prod.nextcle.com/repository/nodejs"
+STEP 4: USER root
+STEP 5: COPY upload/src /tmp/src
+STEP 6: RUN chown -R 1001:0 /tmp/src
+time="2021-12-25T13:35:42Z" level=warning msg="Path \"/run/secrets/etc-pki-entitlement\" from \"/etc/containers/mounts.conf\" doesn't exist, skipping"
+time="2021-12-25T13:35:42Z" level=warning msg="Path \"/run/secrets/redhat.repo\" from \"/etc/containers/mounts.conf\" doesn't exist, skipping"
+STEP 7: USER 1001
+STEP 8: RUN /usr/libexec/s2i/assemble
+time="2021-12-25T13:35:43Z" level=warning msg="Path \"/run/secrets/etc-pki-entitlement\" from \"/etc/containers/mounts.conf\" doesn't exist, skipping"
+time="2021-12-25T13:35:43Z" level=warning msg="Path \"/run/secrets/redhat.repo\" from \"/etc/containers/mounts.conf\" doesn't exist, skipping"
+---> Installing application source ...
+---> Installing all dependencies
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN node-configmap@1.0.0 No repository field.
+npm WARN node-configmap@1.0.0 license should be a valid SPDX license expression
+
+added 43 packages from 27 contributors in 1.621s
+---> Building in production mode
+---> Pruning the development dependencies
+npm WARN node-configmap@1.0.0 No repository field.
+npm WARN node-configmap@1.0.0 license should be a valid SPDX license expression
+
+up to date in 0.264s
+/opt/app-root/src/.npm is not a mountpoint
+---> Cleaning the npm cache /opt/app-root/src/.npm
+/tmp is not a mountpoint
+---> Cleaning the /tmp/npm-*
+STEP 9: CMD /usr/libexec/s2i/run
+STEP 10: COMMIT temp.builder.openshift.io/shl-app-config/myapp-1:3a14fbf1
+Getting image source signatures
+Copying blob sha256:cc423b2000aec40199a4f4e1012f2e9b573d4ce6bc1ca416a598f8e1d45f3d13
+Copying blob sha256:41d099875e8768dcadb9f7e388d68c50eb25f6160c8a3858b966d12d89e4d288
+Copying blob sha256:3cd3b63408eccc3f9a1ffb740cf311d927927f94247e952af1c9b67c1ad2db4f
+Copying blob sha256:3dca2e66497972abbd6a7796a701296ada6bb53013b52d4432bc0d3f1cf0e7bd
+Copying blob sha256:cbd14b4998e05d5a05f10fa887ca9e0bfb2f5731caf1726b31d57f8d6b2a8341
+Copying blob sha256:f67c5456550e4c2e4552cfd5345325841b5052cf40c21dd85888530a1b888fd6
+Copying config sha256:e1f65d5418d0be179d9776d19f10825fc3be52261960d41274fde5b2a5ba80e3
+Writing manifest to image destination
+Storing signatures
+--> e1f65d5418d
+e1f65d5418d0be179d9776d19f10825fc3be52261960d41274fde5b2a5ba80e3
+
+Pushing image image-registry.openshift-image-registry.svc:5000/shl-app-config/myapp:latest ...
+Getting image source signatures
+Copying blob sha256:f67c5456550e4c2e4552cfd5345325841b5052cf40c21dd85888530a1b888fd6
+Copying blob sha256:b46ca46c303b49d886a7585735ebd1dc8651e83d0fab5823300cf3a9fd2febc1
+Copying blob sha256:aa05f1490571b1a76608228bc66534dffe56c139de13f4ba89d9dfba0de8eb3f
+Copying blob sha256:8e111a1c7b205e8d46bf83e9725922a10ac4b59f7ce26679318682def91efa55
+Copying blob sha256:faf2fea3663b6b26a48698856e64b859d6d8cb46bf7d4700e58b7aa941f6fd5f
+Copying blob sha256:ac08ca107ad9ed699cbd28339749dd6463a84c73aa1d468a4241385fc4ec3876
+Copying config sha256:e1f65d5418d0be179d9776d19f10825fc3be52261960d41274fde5b2a5ba80e3
+Writing manifest to image destination
+Storing signatures
+Successfully pushed image-registry.openshift-image-registry.svc:5000/shl-app-config/myapp@sha256:e5d45c7d605d5e91a9a95a2d9a89b9fd997938eec7cc1d835d9655099bb9a94d
+Push successful
+[student@workstation app-config]$ oc expose svc/myapp
+route.route.openshift.io/myapp exposed
+[student@workstation app-config]$ oc get routes
+NAME    HOST/PORT                                         PATH   SERVICES   PORT       TERMINATION   WILDCARD
+myapp   myapp-shl-app-config.apps.eu46.prod.nextcle.com          myapp      8080-tcp                 None
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => undefined
+Error: ENOENT: no such file or directory, open '/opt/app-root/secure/myapp.sec'
+[student@workstation app-config]$ oc create cm myappconf --from-literal APP_MSG="shail is here"
+configmap/myappconf created
+[student@workstation app-config]$ oc describe cm/myappconf
+Name:         myappconf
+Namespace:    shl-app-config
+Labels:       <none>
+Annotations:  <none>
+
+Data
+====
+APP_MSG:
+----
+shail is here
+Events:  <none>
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => undefined
+Error: ENOENT: no such file or directory, open '/opt/app-root/secure/myapp.sec'
+[student@workstation app-config]$ cat app-config/myapp.sec
+cat: app-config/myapp.sec: No such file or directory
+[student@workstation app-config]$ cat app-config/myapp.sec
+cat: app-config/myapp.sec: No such file or directory
+[student@workstation app-config]$ ls
+app.js  myapp.sec  package.json
+[student@workstation app-config]$ cat myapp.sec 
+username=user1
+password=pass1
+salt=xyz123
+[student@workstation app-config]$ oc create secret generic myappfilesec --from-file /home/student/sshl/DO288-apps/app-config/myapp.sec 
+secret/myappfilesec created
+[student@workstation app-config]$ oc get secret
+NAME                       TYPE                                  DATA   AGE
+builder-dockercfg-2grdb    kubernetes.io/dockercfg               1      16m
+builder-token-4sm5v        kubernetes.io/service-account-token   4      16m
+builder-token-x5gpc        kubernetes.io/service-account-token   4      16m
+default-dockercfg-kwprx    kubernetes.io/dockercfg               1      16m
+default-token-k72qd        kubernetes.io/service-account-token   4      16m
+default-token-pgtjx        kubernetes.io/service-account-token   4      16m
+deployer-dockercfg-kd7wh   kubernetes.io/dockercfg               1      16m
+deployer-token-dgczn       kubernetes.io/service-account-token   4      16m
+deployer-token-fh476       kubernetes.io/service-account-token   4      16m
+myappfilesec               Opaque                                1      28s
+[student@workstation app-config]$ oc describe secret myappfilesec
+Name:         myappfilesec
+Namespace:    shl-app-config
+Labels:       <none>
+Annotations:  <none>
+
+Type:  Opaque
+
+Data
+====
+myapp.sec:  42 bytes
+[student@workstation app-config]$ oc get -o yaml secret/myappfilesec
+apiVersion: v1
+data:
+  myapp.sec: dXNlcm5hbWU9dXNlcjEKcGFzc3dvcmQ9cGFzczEKc2FsdD14eXoxMjMK
+kind: Secret
+metadata:
+  creationTimestamp: "2021-12-25T13:44:24Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:myapp.sec: {}
+      f:type: {}
+    manager: kubectl-create
+    operation: Update
+    time: "2021-12-25T13:44:24Z"
+  name: myappfilesec
+  namespace: shl-app-config
+  resourceVersion: "5634823"
+  selfLink: /api/v1/namespaces/shl-app-config/secrets/myappfilesec
+  uid: 760cdbc3-2d1f-417b-85ab-d66af885f016
+type: Opaque
+[student@workstation app-config]$ oc get -o json secret/myappfilesec| jq '.data'
+{
+  "myapp.sec": "dXNlcm5hbWU9dXNlcjEKcGFzc3dvcmQ9cGFzczEKc2FsdD14eXoxMjMK"
+}
+[student@workstation app-config]$ oc set env deployment/myapp --from cm/myappconf
+deployment.apps/myapp updated
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => shail is here
+Error: ENOENT: no such file or directory, open '/opt/app-root/secure/myapp.sec'
+[student@workstation app-config]$ oc set volume deployment/myapp --add -t secret -m /opt/app-root/secure --name myappsec-vol --secret-name myappfilesec
+deployment.apps/myapp volume updated
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => shail is here
+Error: ENOENT: no such file or directory, open '/opt/app-root/secure/myapp.sec'
+[student@workstation app-config]$ oc get pods
+NAME                     READY   STATUS      RESTARTS   AGE
+myapp-1-build            0/1     Completed   0          16m
+myapp-6d79664988-hlwll   1/1     Running     0          3m15s
+[student@workstation app-config]$ oc rsh myapp-6d79664988-hlwll env | grep APP_MSG
+APP_MSG=shail is here
+[student@workstation app-config]$ oc rsh myapp-6d79664988-hlwll bash
+bash-4.2$ ls
+app.js	myapp.sec  node_modules  package-lock.json  package.json
+bash-4.2$ pwd
+/opt/app-root/src
+bash-4.2$ cd /opt/app-root/
+etc/    secure/ src/    
+bash-4.2$ cd /opt/app-root/
+etc/    secure/ src/    
+bash-4.2$ cd /opt/app-root/secure/
+..2021_12_25_13_48_45.159511163/ myapp.sec
+..data/                          
+bash-4.2$ cd /opt/app-root/secure/
+bash-4.2$ ls
+myapp.sec
+bash-4.2$ cat myapp.sec 
+username=user1
+password=pass1
+salt=xyz123
+bash-4.2$ cur localhost
+bash: cur: command not found
+bash-4.2$ curl localhost
+curl: (7) Failed connect to localhost:80; Connection refused
+bash-4.2$ curl localhost:8080 
+Value in the APP_MSG env var is => shail is here
+The secret is => username=user1
+password=pass1
+salt=xyz123
+
+bash-4.2$ exit
+exit
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => shail is here
+The secret is => username=user1
+password=pass1
+salt=xyz123
+
+[student@workstation app-config]$ oc edit cm/myappconf
+configmap/myappconf edited
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => shail is here
+The secret is => username=user1
+password=pass1
+salt=xyz123
+
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => shail is here
+The secret is => username=user1
+password=pass1
+salt=xyz123
+
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => shail is here
+The secret is => username=user1
+password=pass1
+salt=xyz123
+
+[student@workstation app-config]$ oc get pods
+NAME                     READY   STATUS      RESTARTS   AGE
+myapp-1-build            0/1     Completed   0          22m
+myapp-6d79664988-hlwll   1/1     Running     0          9m21s
+[student@workstation app-config]$ oc delete pod myapp-6d79664988-hlwll
+pod "myapp-6d79664988-hlwll" deleted
+[student@workstation app-config]$ curl http://myapp-shl-app-config.apps.eu46.prod.nextcle.com
+Value in the APP_MSG env var is => sourav is here, what do you want to do
+The secret is => username=user1
+password=pass1
+salt=xyz123
+
+[student@workstation app-config]$ oc delete project shl-app-config
+project.project.openshift.io "shl-app-config" deleted
+[student@workstation app-config]$ oc lab app-config finish
+Error: unknown command "lab" for "oc"
+
+Did you mean this?
+	label
+	tag
+
+Run 'oc --help' for usage.
+[student@workstation app-config]$ lab app-config finish
+
+Completing Guided Exercise: Injecting Configuration Data into an Application
+
+ · Log in on OpenShift.........................................  SUCCESS
+ · Remove exercise files.......................................  SUCCESS
+ · Remove solution files.......................................  SUCCESS
+ · Git repo '/home/student/DO288-apps' has no pending changes..  SUCCESS
+
